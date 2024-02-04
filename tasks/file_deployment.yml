@@ -1,5 +1,5 @@
 ---
-- name: 'file_deployment | Deploy file'
+- name: 'file_deployment | Deploy files'
   ansible.builtin.copy:
     attributes: '{{ __t_file.attributes | default(omit) }}'
     backup: '{{ __t_file.backup | default(omit) }}'
