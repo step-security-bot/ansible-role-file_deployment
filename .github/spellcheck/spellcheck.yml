@@ -1,0 +1,81 @@
+---
+spellchecker: 'aspell'
+jobs: 4
+matrix:
+  - name: 'markdown'
+    default_encoding: 'utf-8'
+    expect_match: true
+    sources:
+      - '*.md'
+
+    dictionary:
+      wordlists:
+        - '.github/spellcheck/wordlist.txt'
+
+      output: '.github/spellcheck/spellcheck.dic'
+
+    aspell:
+      # mode: 'markdown'  # this is only supported with aspell 0.60.8, which is not available on RHEL 8
+      # see: https://github.com/GNUAspell/aspell/releases/tag/rel-0.60.8
+      lang: 'en'
+      d: 'en_US'
+      ignore-case: true
+
+    pipeline:
+      - pyspelling.filters.markdown:
+          markdown_extensions:
+            - pymdownx.superfences: {}
+
+      - pyspelling.filters.html:
+          comments: false
+          attributes:
+            - 'title'
+            - 'alt'
+          ignores:
+            - ':matches(code, pre)'
+
+      - pyspelling.filters.context:
+          context_visible_first: true
+          escapes: '\\[\\`~]'
+          delimiters:
+            # ignore text between inline back ticks
+            - open: '(?P<open>`+)'
+              close: '(?P=open)'
+
+      - pyspelling.filters.url: {}
+
+  - name: 'yaml'
+    default_encoding: 'utf-8'
+    expect_match: true
+    sources:
+      - '**/*.yml'
+      - '**/*.yaml'
+      - '*.yaml'
+      - '*.yml'
+
+    dictionary:
+      wordlists:
+        - '.github/spellcheck/wordlist.txt'
+
+      output: '.github/spellcheck/spellcheck.dic'
+    aspell:
+      lang: 'en'
+      d: 'en_US'
+      ignore-case: true
+
+    pipeline:
+      - pyspelling.filters.context:
+          context_visible_first: false
+          delimiters:
+            # take into account simple '- name' lines
+            - open: '(?s)^(?:-\s+?name):\s[^>]'
+              content: '[^\n]+'
+              close: '$'
+
+            # take into account YAML multiline names
+            - open: '(?m)^(?:-\s+?name):\s+?>(?:-)?(\n)(\s+)[^\n].+\2'
+              content: '[^\n].+(\1\2[^\n]+){0,}'
+              close: '$'
+
+      - pyspelling.filters.url: {}
+...
