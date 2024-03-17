@@ -44,7 +44,7 @@ matrix:
 
       - pyspelling.filters.url: {}
 
-  - name: 'yaml'
+  - name: 'ansible'
     default_encoding: 'utf-8'
     expect_match: true
     sources:
@@ -65,16 +65,69 @@ matrix:
 
     pipeline:
       - pyspelling.filters.context:
+          context_visible_first: true
+          delimiters:
+            # ignore nospell lines
+            #
+            # example:
+            #
+            # - name: my task name  # nospell
+            #
+            - open: '(?s).+#(\s+)?.+?nospell(.+)?'
+              close: '$'
+
+            # ignore nospell blocks
+            #
+            # example:
+            #
+            # # begin nospell
+            #
+            # text to exclude
+            # from spelling across
+            # multiple lines
+            #
+            # # end nospell
+            #
+            - open: '(?m)(\s{0,}?)#\s+?begin\s+?nospell$'
+              content: '[\S\s]+'
+              close: '\1#\s+?end\s+?nospell$'
+
+      - pyspelling.filters.context:
           context_visible_first: false
           delimiters:
-            # take into account simple '- name' lines
-            - open: '(?s)^(?:-\s+?name):\s[^>]'
-              content: '[^\n]+'
+            # take into account '- name' lines
+            # fully qualified collection name
+            #
+            # example:
+            #
+            # - name: 'My task'
+            #
+            - open: '(?s)^(?:-\s+?name):\s[^>\|]'
+              content: '.+?'
               close: '$'
 
             # take into account YAML multiline names
-            - open: '(?m)^(?:-\s+?name):\s+?>(?:-)?(\n)(\s+)[^\n].+\2'
+            #
+            # examples:
+            #
+            # - name: >-
+            #     Folded block style with newline trimming at the end
+            #
+            # - name: >
+            #     Folded block style without newline trimming
+            #
+            # - name: |-
+            #     Literal block style with newline trimming
+            #
+            # - name: |
+            #     Literal block style without newline trimming
+            #
+            - open: '(?m)^(?:-\s+?name):\s+?(?:>|\|)(?:-)?(\n)(\s+)[^\n].+\2'
               content: '[^\n].+(\1\2[^\n]+){0,}'
+              close: '$'
+
+            # take into account any comments
+            - open: '(?s)([^\n]+)?#.+?'
               close: '$'
 
       - pyspelling.filters.url: {}
