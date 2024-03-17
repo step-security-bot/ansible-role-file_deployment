@@ -2,8 +2,6 @@
 name: 'Publish latest release to Ansible Galaxy and create a new GitHub release'
 on:  # yamllint disable-line rule:truthy
   push:
-    branches:
-      - 'main'
     tags:
       - 'v*'
   workflow_dispatch: {}
@@ -15,18 +13,18 @@ jobs:
     steps:
       - name: 'checkout'
         uses: 'actions/checkout@v4'
-        if: "startsWith(github.ref, 'refs/tags/')"
+        if: "github.ref_name == 'main'"
 
       - name: 'galaxy'
         uses: 'robertdebock/galaxy-action@1.2.0'
-        if: "startsWith(github.ref, 'refs/tags/')"
+        if: "github.ref_name == 'main'"
         with:
           galaxy_api_key: '${{ secrets.galaxy_api_key }}'
           git_branch: 'main'
 
       - name: 'Create a new release on GitHub'
         uses: 'softprops/action-gh-release@v2'
-        if: "startsWith(github.ref, 'refs/tags/')"
+        if: "github.ref_name == 'main'"
         with:
           draft: false
           prerelease: false
