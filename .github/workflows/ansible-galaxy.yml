@@ -1,7 +1,6 @@
 ---
-name: 'Publish latest release to Ansible Galaxy'
-
-on:
+name: 'Publish latest release to Ansible Galaxy and create a new GitHub release'
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - 'main'
