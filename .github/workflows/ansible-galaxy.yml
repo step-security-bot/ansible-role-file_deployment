@@ -1,10 +1,11 @@
 ---
-name: 'Publish latest release to Ansible Galaxy'
-
-on:
+name: 'Publish latest release to Ansible Galaxy and create a new GitHub release'
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - 'main'
+    tags:
+      - 'v*'
   workflow_dispatch: {}
 
 jobs:
@@ -13,10 +14,21 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - name: 'checkout'
-        uses: 'actions/checkout@v2'
+        uses: 'actions/checkout@v4'
+
       - name: 'galaxy'
         uses: 'robertdebock/galaxy-action@1.2.0'
         with:
           galaxy_api_key: '${{ secrets.galaxy_api_key }}'
           git_branch: 'main'
+
+      - name: 'Create a new release on GitHub'
+        uses: 'softprops/action-gh-release@v2'
+        with:
+          draft: false
+          prerelease: false
+          token: '${{ github.token }}'
+          discussion_category_name: 'Release'
+          generate_release_notes: true
+          make_latest: true
 ...

@@ -1,7 +1,7 @@
 ---
 # NOTE: _fd_quiet_assert does not impact this task, as it first needs to be ensured that it actually is
 #       properly defined
-- name: 'Ensure mandatory variables, as  well as variables, which have a default value, are set (boolean)'
+- name: 'Ensure mandatory variables, as well as variables, which have a default value, are set (boolean)'
   ansible.builtin.assert:
     that:
       - "lookup('ansible.builtin.vars', __t_var) is defined"
@@ -18,7 +18,7 @@
 - name: 'Ensure _fd_packages is defined properly'
   ansible.builtin.assert:
     that:
-      # dest is defined for all items
+      # destination is defined for all items
       - >-
         _fd_files |
         selectattr('dest', 'undefined') |
@@ -42,14 +42,14 @@
         selectattr('mode', 'undefined') |
         length == 0
 
-      # ensure all files that don't have src defined, have content defined
+      # ensure all files that don't have a source defined, have content defined
       - >-
         _fd_files |
         rejectattr('src', 'defined') |
         selectattr('content', 'undefined') |
         length == 0
 
-      # ensure all files that don't have content defined, have src defined
+      # ensure all files that don't have content defined, have a source defined
       - >-
         _fd_files |
         rejectattr('content', 'defined') |
