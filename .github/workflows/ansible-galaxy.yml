@@ -15,15 +15,18 @@ jobs:
     steps:
       - name: 'checkout'
         uses: 'actions/checkout@v4'
+        if: "startsWith(github.ref, 'refs/tags/')"
 
       - name: 'galaxy'
         uses: 'robertdebock/galaxy-action@1.2.0'
+        if: "startsWith(github.ref, 'refs/tags/')"
         with:
           galaxy_api_key: '${{ secrets.galaxy_api_key }}'
           git_branch: 'main'
 
       - name: 'Create a new release on GitHub'
         uses: 'softprops/action-gh-release@v2'
+        if: "startsWith(github.ref, 'refs/tags/')"
         with:
           draft: false
           prerelease: false
