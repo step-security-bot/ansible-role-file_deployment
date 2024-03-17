@@ -1,9 +1,18 @@
 ---
+ci:
+  autofix_prs: false
+  skip:
+    - 'pyspelling'
+    - 'yamllint'
+    - 'markdown-link-check'
+    - 'markdownlint'
+    - 'ansible-lint'
+
 repos:
   - repo: 'https://github.com/ansible/ansible-lint'
     rev: 'v6.20.3'
     hooks:
-      - name: 'Ansible-lint'
+      - name: 'ansible-lint'
         additional_dependencies:
           # https://github.com/pre-commit/pre-commit/issues/1526
           # If you want to use specific version of ansible-core or ansible, feel
@@ -18,4 +27,70 @@ repos:
         # do not pass files to ansible-lint, see:
         # https://github.com/ansible/ansible-lint/issues/611
         pass_filenames: false
+
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: 'v4.5.0'
+    hooks:
+      - id: 'check-executables-have-shebangs'
+      - id: 'check-merge-conflict'
+        args:
+          - '--assume-in-merge'
+      - id: 'check-json'
+      - id: 'check-shebang-scripts-are-executable'
+      - id: 'check-symlinks'
+      - id: 'check-toml'
+      - id: 'check-xml'
+      - id: 'debug-statements'
+      - id: 'destroyed-symlinks'
+      - id: 'detect-private-key'
+      - id: 'mixed-line-ending'
+        args:
+          - '--fix=no'
+      - id: 'pretty-format-json'
+        args:
+          - '--no-sort-keys'
+          - '--indent=2'
+      - id: 'trailing-whitespace'
+        args:
+          - '--markdown-linebreak-ext=md'
+
+  - repo: 'local'
+    hooks:
+      - id: 'pyspelling'
+        name: 'pyspelling'
+        language: 'python'
+        entry: 'pyspelling -v --name markdown --source'
+        files: '.+\.md$'
+        pass_filenames: true
+        verbose: true
+        exclude: '^(datenschutzerklaerung.md)$'
+
+  - repo: 'local'
+    hooks:
+      - id: 'yamllint'
+        name: 'yamllint'
+        language: 'python'
+        entry: 'yamllint'
+        pass_filenames: true
+        verbose: true
+        types:
+          - 'file'
+          - 'yaml'
+
+  - repo: 'local'
+    hooks:
+      - id: 'markdown-link-check'
+        name: 'markdown-link-check'
+        language: 'node'
+        entry: 'markdown-link-check -vp -c .markdown-link-check.json'
+        pass_filenames: true
+        files: '.+\.md$'
+        verbose: true
+
+  - repo: 'https://github.com/igorshubovych/markdownlint-cli'
+    rev: 'v0.39.0'
+    hooks:
+      - id: 'markdownlint'
+        verbose: true
+        pass_filenames: true
 ...
