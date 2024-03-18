@@ -50,7 +50,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          token: '${{ github.token }}'
+          token: '${{ secrets.release_token }}'
           discussion_category_name: 'Release'
           generate_release_notes: true
           make_latest: true
