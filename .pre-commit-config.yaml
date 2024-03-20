@@ -2,11 +2,11 @@
 ci:
   autofix_prs: false
   skip:
-    - 'pyspelling'
     - 'yamllint'
     - 'markdown-link-check'
     - 'markdownlint'
     - 'ansible-lint'
+#    - 'pyspelling'
 
 repos:
   - repo: 'https://github.com/ansible/ansible-lint'
