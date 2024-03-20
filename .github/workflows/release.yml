@@ -51,7 +51,7 @@ jobs:
           draft: false
           prerelease: false
           token: '${{ secrets.release_token }}'
-          discussion_category_name: 'Release'
+          discussion_category_name: 'Announcements'
           generate_release_notes: true
           make_latest: true
 ...
