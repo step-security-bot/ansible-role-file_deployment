@@ -38,7 +38,7 @@ jobs:
         if: "contains(${{ needs.check.outputs.branch }}, 'main')"
 
       - name: 'galaxy'
-        uses: 'robertdebock/galaxy-action@1.2.0'
+        uses: 'robertdebock/galaxy-action@1.2.1'
         if: "contains(${{ needs.check.outputs.branch }}, 'main')"
         with:
           galaxy_api_key: '${{ secrets.galaxy_api_key }}'
