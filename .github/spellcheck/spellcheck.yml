@@ -86,7 +86,7 @@ matrix:
             # # end nospell
             #
             - open: '(?m)(\s{0,}?)#\s+?begin\s+?nospell$'
-              content: '[\S\s]+'
+              content: '[\S\s]+?'
               close: '\1#\s+?end\s+?nospell$'
 
       - pyspelling.filters.context:
