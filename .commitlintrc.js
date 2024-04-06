@@ -1,5 +1,4 @@
 module.exports = {
-    plugins: ['selective-scope'],
     parserPreset: 'conventional-changelog-conventionalcommits',
     rules: {
         'body-leading-blank': [1, 'always'],
