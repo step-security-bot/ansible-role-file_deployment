@@ -4,7 +4,6 @@ ci:
   skip:
     - 'ansible-lint'
     - 'commitlint'
-    - 'jshint'
     - 'markdown-link-check'
     - 'markdownlint'
     - 'pyspelling'
