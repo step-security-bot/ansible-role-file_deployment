@@ -7,7 +7,7 @@ on:  # yamllint disable-line rule:truthy
 jobs:
   commitlint:
     runs-on: 'ubuntu-latest'
-    if: "${{ github.actor != 'pre-commit ci[bot]' }}"
+    if: "${{ github.actor != 'pre-commit-ci[bot]' }}"
     steps:
       - uses: 'actions/checkout@v4'
         with:
