@@ -71,7 +71,7 @@ jobs:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
           LOG_LEVEL: 'debug'
-          AUTOMATION_HUB_TOKEN: '${{ secrets.automation_hub_token }}'
+          RENOVATE_AUTOMATION_HUB_TOKEN: '${{ secrets.automation_hub_token }}'
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
