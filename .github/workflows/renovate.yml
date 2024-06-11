@@ -66,7 +66,6 @@ jobs:
           renovate-version: '37.403.0'
           configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.renovate_token }}'
-          env-regex: '^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|AWS_TOKEN|AUTOMATION_HUB_TOKEN)$'
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
