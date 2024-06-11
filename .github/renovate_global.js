@@ -1,7 +1,4 @@
 module.exports = {
-  secrets: {
-    RENOVATE_AUTOMATION_HUB_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_TOKEN,
-  },
   packageRules: [
     {
       matchDatasources: [
