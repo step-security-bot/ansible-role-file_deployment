@@ -1,6 +1,6 @@
 module.exports = {
   secrets: {
-    AUTOMATION_HUB_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_TOKEN,
+    RENOVATE_AUTOMATION_HUB_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_TOKEN,
   },
   packageRules: [
     {
