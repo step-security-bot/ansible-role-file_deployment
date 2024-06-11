@@ -7,6 +7,16 @@
   "assignees": [
     "sscheib"
   ],
+  "hostRules": [
+    {
+      "matchHost": "https://console.redhat.com/api/automation-hub/content/published/",
+      "token": "process.env.RENOVATE_AUTOMATION_HUB_TOKEN"
+    },
+    {
+      "matchHost": "https://console.redhat.com/api/automation-hub/content/validated/",
+      "token": "process.env.RENOVATE_AUTOMATION_HUB_TOKEN"
+    }
+  ],
   "packageRules": [
     {
       "matchFileNames": [
@@ -23,6 +33,16 @@
         "enabled": true
       },
       "rangeStrategy": "bump"
+    },
+    {
+      "matchDatasources": [
+        "galaxy-collection"
+      ],
+      "registryUrls": [
+        "https://console.redhat.com/api/automation-hub/content/published/",
+        "https://console.redhat.com/api/automation-hub/content/validated/",
+        "https://galaxy.ansible.com"
+      ]
     }
   ]
 }
