@@ -9,7 +9,7 @@
   ],
   "packageRules": [
     {
-      "paths": [
+      "matchFileNames": [
         ".github/workflows/*.yml",
         "collections/requirements.yml",
         "roles/requirements.yml",
