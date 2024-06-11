@@ -65,7 +65,7 @@ jobs:
         with:
           renovate-version: '37.403.0'
           configurationFile: '.github/renovate/renovate_wf.json'
-          token: '${{ secrets.renovate_token }}'
+          token: '${{ secrets.RENOVATE_TOKEN }}'
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           LOG_LEVEL: 'debug'
