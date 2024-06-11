@@ -64,7 +64,7 @@ jobs:
         uses: 'renovatebot/github-action@v40.1.12'
         with:
           renovate-version: '37.403.0'
-          configurationFile: '.github/renovate/renovate_wf.json'
+          configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.RENOVATE_TOKEN }}'
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
