@@ -10,13 +10,13 @@
   "hostRules": [
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/published/",
-      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
+      "username": "steffen@scheib.me",
       "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD",
       "authType": "basic"
     },
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/validated/",
-      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
+      "username": "steffen@scheib.me",
       "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD",
       "authType": "basic"
     }
