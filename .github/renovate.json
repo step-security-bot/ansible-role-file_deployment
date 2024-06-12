@@ -10,13 +10,13 @@
   "hostRules": [
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/published/",
-      "username": "steffen@scheib.me",
+      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
       "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD",
       "authType": "basic"
     },
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/validated/",
-      "username": "steffen@scheib.me",
+      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
       "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD",
       "authType": "basic"
     }
@@ -43,8 +43,8 @@
         "galaxy-collection"
       ],
       "registryUrls": [
-        "https://console.redhat.com/api/automation-hub/content/published/",
-        "https://console.redhat.com/api/automation-hub/content/validated/",
+        "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/published/",
+        "https://console.redhat.com/api/automation-hub/v3/plugin/ansible/content/validated/",
         "https://galaxy.ansible.com"
       ]
     }
