@@ -10,11 +10,13 @@
   "hostRules": [
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/content/published/",
-      "token": "process.env.RENOVATE_AUTOMATION_HUB_TOKEN"
+      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
+      "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD"
     },
     {
       "matchHost": "https://console.redhat.com/api/automation-hub/content/validated/",
-      "token": "process.env.RENOVATE_AUTOMATION_HUB_TOKEN"
+      "username": "process.env.RENOVATE_AUTOMATION_HUB_USERNAME",
+      "password": "process.env.RENOVATE_AUTOMATION_HUB_PASSWORD"
     }
   ],
   "packageRules": [
