@@ -1,4 +1,5 @@
 module.exports = {
+  gitAuthor: 'Renovate <renovate@scheib.me>',
   packageRules: [
     {
       matchDatasources: [
