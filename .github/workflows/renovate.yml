@@ -83,7 +83,7 @@ jobs:
             "-d"
             "client_id=cloud-services"
             "-d"
-            "refresh_token=${token}"
+            "refresh_token=${{ secrets.AUTOMATION_HUB_TOKEN }}"
             "--silent"
             "--show-error"
           )
