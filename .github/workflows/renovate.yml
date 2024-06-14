@@ -97,7 +97,7 @@ jobs:
           # echo "::add-mask::${bearerToken}"
 
           # make the bearer token visible to other workflow steps
-          echo AUTH_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
+          echo RENOVATE_AUTOMATION_HUB_AUTH_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
 
       - name: 'Run Renovate'
         uses: 'renovatebot/github-action@v40.1.12'
@@ -111,7 +111,7 @@ jobs:
           LOG_LEVEL: 'debug'
           RENOVATE_AUTOMATION_HUB_USERNAME: '${{ secrets.automation_hub_username }}'
           RENOVATE_AUTOMATION_HUB_PASSWORD: '${{ secrets.automation_hub_password }}'
-          RENOVATE_AUTOMATION_HUB_AUTH_TOKEN: "${AUTH_TOKEN}"
+          # RENOVATE_AUTOMATION_HUB_AUTH_TOKEN: "$CRCT"
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
