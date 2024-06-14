@@ -12,6 +12,17 @@ on:  # yamllint disable-line rule:truthy
           - 'disabled'
           - 'reset'
 
+      renovateLogLevel:
+        description: 'Renovate Log Level'
+        type: 'choice'
+        default: 'info'
+        options:
+          - 'debug'
+          - 'info'
+          - 'warn'
+          - 'error'
+          - 'fatal'
+
   schedule:
     - cron: '0 */3 * * *'
 
@@ -103,7 +114,7 @@ jobs:
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
-          LOG_LEVEL: 'debug'
+          LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'info' }}"
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
