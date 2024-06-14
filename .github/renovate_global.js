@@ -5,7 +5,7 @@ module.exports = {
     AUTOMATION_HUB_BEARER_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_BEARER_TOKEN,
   },
   allowedHeaders: [
-    '/Authorization:\\s+Bearer.+?/i',
+    'Authorization',
   ],
   gitAuthor: 'Renovate <renovate@scheib.me>',
   packageRules: [
