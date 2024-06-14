@@ -72,9 +72,6 @@ jobs:
           # special parameters $* and $@ are not affected from this
           set -o nounset
 
-          # jq is required to work with the JSON output of the API
-          sudo apt-get install -y jq
-
           # set the parameters for curl
           params=(
             "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token"
@@ -94,8 +91,8 @@ jobs:
           # mask the bearer token to prevent leaking
           echo "::add-mask::${bearerToken}"
 
-          # make the bearer token to other workflow steps
-          echo AUTOMATION_HUB_BEARER_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
+          # make the bearer token visible to other workflow steps
+          echo BEARER_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
 
       - name: 'Run Renovate'
         uses: 'renovatebot/github-action@v40.1.12'
@@ -109,7 +106,7 @@ jobs:
           LOG_LEVEL: 'debug'
           RENOVATE_AUTOMATION_HUB_USERNAME: '${{ secrets.automation_hub_username }}'
           RENOVATE_AUTOMATION_HUB_PASSWORD: '${{ secrets.automation_hub_password }}'
-          RENOVATE_AUTOMATION_HUB_BEARER_TOKEN: '${AUTOMATION_HUB_BEARER_TOKEN}'
+          RENOVATE_AUTOMATION_HUB_BEARER_TOKEN: '${BEARER_TOKEN}'
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
