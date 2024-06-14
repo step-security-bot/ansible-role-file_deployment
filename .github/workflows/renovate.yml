@@ -106,7 +106,7 @@ jobs:
           LOG_LEVEL: 'debug'
           RENOVATE_AUTOMATION_HUB_USERNAME: '${{ secrets.automation_hub_username }}'
           RENOVATE_AUTOMATION_HUB_PASSWORD: '${{ secrets.automation_hub_password }}'
-          RENOVATE_AUTOMATION_HUB_BEARER_TOKEN: '${BEARER_TOKEN}'
+          RENOVATE_AUTOMATION_HUB_BEARER_TOKEN: "${BEARER_TOKEN}"
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
