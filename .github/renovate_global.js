@@ -1,8 +1,6 @@
 module.exports = {
   secrets: {
-    AUTOMATION_HUB_USERNAME: process.env.RENOVATE_AUTOMATION_HUB_USERNAME,
-    AUTOMATION_HUB_PASSWORD: process.env.RENOVATE_AUTOMATION_HUB_PASSWORD,
-    AUTH_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_AUTH_TOKEN,
+    AUTOMATION_HUB_AUTH_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_AUTH_TOKEN,
   },
   allowedHeaders: [
     'Authorization',
@@ -24,13 +22,13 @@ module.exports = {
     {
       matchHost: 'https://console.redhat.com/api/automation-hub/content/published/',
       headers: {
-        Authorization: 'Bearer {{ secrets.AUTH_TOKEN }}',
+        Authorization: 'Bearer {{ secrets.AUTOMATION_HUB_AUTH_TOKEN }}',
       },
     },
     {
       matchHost: 'https://console.redhat.com/api/automation-hub/content/validated/',
       headers: {
-        Authorization: 'Bearer {{ secrets.AUTH_TOKEN }}',
+        Authorization: 'Bearer {{ secrets.AUTOMATION_HUB_AUTH_TOKEN }}',
       },
     },
   ],
