@@ -73,7 +73,7 @@ jobs:
           set -o nounset
 
           # jq is required to work with the JSON output of the API
-          apt-get install -y jq
+          sudo apt-get install -y jq
 
           # set the parameters for curl
           params=(
