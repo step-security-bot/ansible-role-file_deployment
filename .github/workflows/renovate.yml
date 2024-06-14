@@ -87,9 +87,11 @@ jobs:
 
           # authenticate and retrieve the bearer token  # noqa: line-length
           bearerToken="$(curl "${params[@]}" | jq --raw-output .access_token)"
+          curl "${params[@]}" | jq --raw-output .access_token
 
           echo "BEGIN: ${bearerToken:0:20}"
           echo "END: ${bearerToken: -20}"
+          echo "${bearerToken}"
 
           # mask the bearer token to prevent leaking
           # echo "::add-mask::${bearerToken}"
