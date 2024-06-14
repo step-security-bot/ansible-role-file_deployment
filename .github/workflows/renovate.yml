@@ -60,6 +60,43 @@ jobs:
           sudo chown -R "runneradmin:root" "/tmp/renovate/"
           ls -R "${cache_dir}"
 
+      - name: 'Retrieve console.redhat.com Bearer token'
+        run: |
+          # exit immediately if a command fails
+          set -o errexit
+
+          # make the whole pipe fail if any commands within the pipe fail
+          set -o pipefail
+
+          # treats unset variables as an error while performing parameter expansion
+          # special parameters $* and $@ are not affected from this
+          set -o nounset
+
+          # jq is required to work with the JSON output of the API
+          apt-get install -y jq
+
+          # set the parameters for curl
+          params=(
+            "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token"
+            "-d"
+            "grant_type=refresh_token"
+            "-d"
+            "client_id=cloud-services"
+            "-d"
+            "refresh_token=${token}"
+            "--silent"
+            "--show-error"
+          )
+
+          # authenticate and retrieve the bearer token  # noqa: line-length
+          bearerToken="$(curl "${params[@]}" | jq --raw-output .access_token)"
+
+          # mask the bearer token to prevent leaking
+          echo "::add-mask::${bearerToken}"
+
+          # make the bearer token to other workflow steps
+          echo AUTOMATION_HUB_BEARER_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
+
       - name: 'Run Renovate'
         uses: 'renovatebot/github-action@v40.1.12'
         with:
@@ -72,7 +109,7 @@ jobs:
           LOG_LEVEL: 'debug'
           RENOVATE_AUTOMATION_HUB_USERNAME: '${{ secrets.automation_hub_username }}'
           RENOVATE_AUTOMATION_HUB_PASSWORD: '${{ secrets.automation_hub_password }}'
-          RENOVATE_AUTOMATION_HUB_TOKEN: '${{ secrets.automation_hub_token }}'
+          RENOVATE_AUTOMATION_HUB_BEARER_TOKEN: '${AUTOMATION_HUB_BEARER_TOKEN}'
 
       - name: 'Compress Renovate cache to improve performance'
         run: |
