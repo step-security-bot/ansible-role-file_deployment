@@ -5,14 +5,14 @@ This is a *very* simple role that will copy files to the managed nodes using `an
 ## Badges
 <!-- markdownlint-disable MD013 -->
 | Badge |
-| :---: |
+| :---  |
 | [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) |
 | [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org) |
 | [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) |
 | [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sscheib/ansible-role-file_deployment/badge)](https://scorecard.dev/viewer/?uri=github.com/sscheib/ansible-role-file_deployment) |
 
 | Workflow Badge |
-| :------------: |
+| :------------  |
 | [![ansible-lint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/ansible-lint.yml) |
 | [![CodeQL](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github-code-scanning/codeql) |
 | [![commitlint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/commitlint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/commitlint.yml) |
