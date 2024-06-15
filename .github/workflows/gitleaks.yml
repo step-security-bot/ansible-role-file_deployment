@@ -21,6 +21,8 @@ jobs:
 
       - name: 'Checkout the repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+        with:
+          fetch-depth: 0
 
       - name: 'Run gitleaks'
         uses: 'gitleaks/gitleaks-action@44c470ffc35caa8b1eb3e8012ca53c2f9bea4eb5' # v2.3.6
