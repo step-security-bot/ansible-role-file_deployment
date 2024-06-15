@@ -25,5 +25,8 @@
       },
       "rangeStrategy": "bump"
     }
-  ]
+  ],
+  "pre-commit": {
+    "enabled": true
+  }
 }
