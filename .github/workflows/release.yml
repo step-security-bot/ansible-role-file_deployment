@@ -6,9 +6,8 @@ on:  # yamllint disable-line rule:truthy
       - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch: {}
 
-permissions:
-  contents: 'write'
-  discussions: 'write'
+# Declare default permissions as read only
+permissions: 'read-all'
 
 jobs:
   check-current-branch:
@@ -39,6 +38,9 @@ jobs:
     name: 'Publish to Ansible Galaxy'
     runs-on: 'ubuntu-latest'
     needs: 'check-current-branch'
+    permissions:
+      contents: 'write'
+      discussions: 'write'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1

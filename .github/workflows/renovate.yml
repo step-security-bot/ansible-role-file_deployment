@@ -26,6 +26,9 @@ on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: '0 */3 * * *'
 
+# Declare default permissions as read only
+permissions: 'read-all'
+
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
   cache_archive: 'renovate_cache.tar.gz'
@@ -40,6 +43,9 @@ env:
 jobs:
   renovate:
     runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'write'
+      pull-requests: 'write'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
