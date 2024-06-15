@@ -17,8 +17,8 @@
       "pattern": ".+?\\%23.+?"
     },
     {
-      "___comment___": "scorecard.dev API *always* returns 0",
-      "pattern": "https://api.scorecard.dev"
+      "___comment___": "scorecard.dev *always* returns 0",
+      "pattern": "^https://scorecard.dev"
     }
   ],
   "timeout": "20s",
