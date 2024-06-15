@@ -112,7 +112,7 @@ jobs:
           echo RENOVATE_AUTOMATION_HUB_AUTH_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
 
       - name: 'Run Renovate'
-        users: 'renovatebot/github-action@21d88b0bf0183abcee15f990011cca090dfc47dd' # v40.1.12
+        uses: 'renovatebot/github-action@21d88b0bf0183abcee15f990011cca090dfc47dd' # v40.1.12
         with:
           renovate-version: '37.403.0'
           configurationFile: '.github/renovate_global.js'
