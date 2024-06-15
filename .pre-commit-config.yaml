@@ -5,6 +5,7 @@ ci:
   skip:
     - 'ansible-lint'
     - 'commitlint'
+    - 'gitleaks'
     - 'markdown-link-check'
     - 'markdownlint'
     - 'pyspelling'
@@ -140,4 +141,11 @@ repos:
           - 'pre-commit'
         types:
           - 'javascript'
+
+  - repo: 'https://github.com/gitleaks/gitleaks'
+    rev: 'v8.18.3'
+    hooks:
+      - id: 'gitleaks'
+        stages:
+          - 'pre-commit'
 ...
