@@ -15,6 +15,10 @@
     {
       "___comment___": "ignoring URLs with %23 as it leads to false positives. see https://github.com/tcort/markdown-link-check/issues/264",
       "pattern": ".+?\\%23.+?"
+    },
+    {
+      "___comment___": "scorecard.dev *always* returns 0",
+      "pattern": "^https://scorecard.dev"
     }
   ],
   "timeout": "20s",
