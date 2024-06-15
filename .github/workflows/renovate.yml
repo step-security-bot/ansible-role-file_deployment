@@ -41,10 +41,16 @@ jobs:
   renovate:
     runs-on: 'ubuntu-latest'
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          egress-policy: 'audit'
 
-      - uses: 'dawidd6/action-download-artifact@v5'
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Download cache of the previous workflow run'
+        uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
         if: "github.event.inputs.repoCache != 'disabled'"
         continue-on-error: true
         with:
@@ -106,7 +112,7 @@ jobs:
           echo RENOVATE_AUTOMATION_HUB_AUTH_TOKEN="${bearerToken}" >> "${GITHUB_ENV}"
 
       - name: 'Run Renovate'
-        uses: 'renovatebot/github-action@v40.1.12'
+        users: 'renovatebot/github-action@21d88b0bf0183abcee15f990011cca090dfc47dd' # v40.1.12
         with:
           renovate-version: '37.403.0'
           configurationFile: '.github/renovate_global.js'
@@ -123,7 +129,8 @@ jobs:
           # their full path, ultimately leading to a nested directory situation.
           tar -czvf "${cache_archive}" -C "${cache_dir}" .
 
-      - uses: 'actions/upload-artifact@v4'
+      - name: 'Upload compressed cache'
+        uses: 'actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808' # v4.3.3
         if: "github.event.inputs.repoCache != 'disabled'"
         with:
           name: '${{ env.cache_key }}'
