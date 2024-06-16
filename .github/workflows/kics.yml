@@ -1,14 +1,9 @@
 ---
-name: 'Scorecard'
+name: 'KICS'
 on:  # yamllint disable-line rule:truthy
-  # For Branch-Protection check. Only the default branch is supported. See
-  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#branch-protection
-  branch_protection_rule: {}
-  # To guarantee Maintained check is occasionally updated. See
-  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#maintained
   schedule:
-    - cron: '43 17 * * 4'
-  push:
+    - cron: '43 18 * * 4'
+  pull_request:
     branches:
       - 'main'
   workflow_dispatch: {}
@@ -18,7 +13,7 @@ permissions: 'read-all'
 
 jobs:
   analysis:
-    name: 'Scorecard analysis'
+    name: 'KICS analysis'
     runs-on: 'ubuntu-latest'
     permissions:
       # Needed to upload the results to code-scanning dashboard.
@@ -40,26 +35,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 'Run analysis'
-        uses: 'ossf/scorecard-action@dc50aa9510b46c811795eb24b2f1ba02a914e534' # v2.3.3
+      - name: 'Run KICS scan'
+        uses: 'checkmarx/kics-github-action@aacf8e81cd48e227259c937c215b352e02ad447a' # v2.1.0
         with:
-          results_file: 'results.sarif'
-          results_format: 'sarif'
-          # (Optional) "write" PAT token. Uncomment the `repo_token` line below if:
-          # - you want to enable the Branch-Protection check on a *public* repository, or
-          # - you are installing Scorecard on a *private* repository
-          # To create the PAT, follow the steps in
-          # https://github.com/ossf/scorecard-action?tab=readme-ov-file#authentication-with-fine-grained-pat-optional.
-          # repo_token: ${{ secrets.SCORECARD_TOKEN }}
-
-          # Public repositories:
-          #   - Publish results to OpenSSF REST API for easy access by consumers
-          #   - Allows the repository to include the Scorecard badge.
-          #   - See https://github.com/ossf/scorecard-action#publishing-results.
-          # For private repositories:
-          #   - `publish_results` will always be set to `false`, regardless
-          #     of the value entered here.
-          publish_results: true
+          output_path: './'
+          config_path: './kics_config'
+          output_formats: 'sarif'
+          ignore_on_exit: 'results'
 
       # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
       # format to the repository Actions tab.
