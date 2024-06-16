@@ -3,11 +3,13 @@ ci:
   autofix_prs: false
   autoupdate_commit_msg: 'chore: pre-commit dependency update'
   skip:
+    - 'actionlint'
     - 'ansible-lint'
     - 'check-github-workflows'
     - 'check-renovate'
     - 'commitlint'
     - 'gitleaks'
+    - 'kics-scan'
     - 'markdown-link-check'
     - 'markdownlint'
     - 'pyspelling'

@@ -38,6 +38,7 @@ jobs:
       - name: 'Run KICS scan'
         uses: 'checkmarx/kics-github-action@aacf8e81cd48e227259c937c215b352e02ad447a' # v2.1.0
         with:
+          path: './'
           output_path: './'
           config_path: './kics_config'
           output_formats: 'sarif'
