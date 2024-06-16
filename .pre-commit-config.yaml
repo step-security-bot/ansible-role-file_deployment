@@ -185,4 +185,35 @@ repos:
         verbose: true
         stages:
           - 'pre-commit'
+
+  - repo: 'https://github.com/sirosen/texthooks'
+    rev: '0.6.6'
+    hooks:
+      - id: 'alphabetize-codeowners'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'fix-ligatures'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'fix-spaces'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'forbid-bidi-controls'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/koalaman/shellcheck-precommit'
+    rev: 'v0.10.0'
+    hooks:
+      - id: 'shellcheck'
+        verbose: true
+        stages:
+          - 'pre-commit'
 ...
