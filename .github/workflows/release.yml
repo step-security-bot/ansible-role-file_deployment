@@ -30,9 +30,9 @@ jobs:
         # 3. Put that string in output
         run: |
           raw="$(git branch -r --contains "${{ github.ref }}")"
-          branch="$(echo "${raw//origin\//}" | tr -d '\n')"
+          branch="$(echo "${raw//origin\//}" | tr -d '\n' | sed -E 's/^[[:space:]]//')"
           echo "{name}=branch" >> "${GITHUB_OUTPUT}"
-          echo "Branches where this tag exists: ${branch}"
+          echo "Branches where this tag exists: $branch"
 
   build:
     name: 'Publish to Ansible Galaxy'
