@@ -29,8 +29,8 @@ jobs:
         # 2. Remove 'origin/' from that result
         # 3. Put that string in output
         run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch="$(echo ${raw//origin\//} | tr -d '\n')"
+          raw="$(git branch -r --contains "${{ github.ref }}")"
+          branch="$(echo "${raw//origin\//}" | tr -d '\n')"
           echo "{name}=branch" >> $GITHUB_OUTPUT
           echo "Branches where this tag exists : $branch."
 
