@@ -1,5 +1,0 @@
----
-collections:
-  - name: 'redhat.satellite'
-    version: '4.0.0'
-...
