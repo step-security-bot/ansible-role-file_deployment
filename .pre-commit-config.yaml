@@ -3,9 +3,13 @@ ci:
   autofix_prs: false
   autoupdate_commit_msg: 'chore: pre-commit dependency update'
   skip:
+    - 'actionlint'
     - 'ansible-lint'
+    - 'check-github-workflows'
+    - 'check-renovate'
     - 'commitlint'
     - 'gitleaks'
+    - 'kics-scan'
     - 'markdown-link-check'
     - 'markdownlint'
     - 'pyspelling'
@@ -146,6 +150,70 @@ repos:
     rev: 'v8.18.4'
     hooks:
       - id: 'gitleaks'
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/Checkmarx/kics'
+    rev: 'v2.1.0'
+    hooks:
+      - id: 'kics-scan'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/python-jsonschema/check-jsonschema'
+    rev: '0.28.5'
+    hooks:
+      - id: 'check-github-workflows'
+        args:
+          - '--verbose'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'check-renovate'
+        args:
+          - '--verbose'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/rhysd/actionlint'
+    rev: 'v1.7.1'
+    hooks:
+      - id: 'actionlint'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/sirosen/texthooks'
+    rev: '0.6.6'
+    hooks:
+      - id: 'alphabetize-codeowners'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'fix-ligatures'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'fix-spaces'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+      - id: 'forbid-bidi-controls'
+        verbose: true
+        stages:
+          - 'pre-commit'
+
+  - repo: 'https://github.com/koalaman/shellcheck-precommit'
+    rev: 'v0.10.0'
+    hooks:
+      - id: 'shellcheck'
+        verbose: true
         stages:
           - 'pre-commit'
 ...
