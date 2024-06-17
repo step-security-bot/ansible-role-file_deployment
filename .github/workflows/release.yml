@@ -1,9 +1,9 @@
 ---
 name: 'Publish to Ansible Galaxy'
 on:  # yamllint disable-line rule:truthy
-#  push:
-#    branches:
-#      - 'main'
+  push:
+    branches:
+      - 'main'
   workflow_dispatch: {}
 
 permissions:
@@ -38,15 +38,4 @@ jobs:
         with:
           galaxy_api_key: '${{ secrets.galaxy_api_key }}'
           git_branch: 'main'
- #
- #      - name: 'Create a new release on GitHub'
-#        uses: 'softprops/action-gh-release@69320dbe05506a9a39fc8ae11030b214ec2d1f87' # v2.0.5
-#        if: "contains(needs.check-current-branch.outputs.branch, 'main')"
-#        with:
-#          draft: false
-#          prerelease: false
-#          token: '${{ secrets.release_token }}'
-#          discussion_category_name: 'Announcements'
-#          generate_release_notes: true
-#          make_latest: true
 ...
