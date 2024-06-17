@@ -32,9 +32,6 @@ jobs:
         uses: 'cycjimmy/semantic-release-action@61680d0e9b02ff86f5648ade99e01be17f0260a4' # v4.0.0
         env:
           GH_TOKEN: '${{ secrets.RELEASE_TOKEN }}'
-        with:
-          extra_plugins: |
-            conventional-changelog-conventionalcommits
 
       - name: 'Publish to Ansible Galaxy'
         uses: 'robertdebock/galaxy-action@7d89099e09f4385ec4b53eb58c0d120f1ad806dd' # 1.2.1
