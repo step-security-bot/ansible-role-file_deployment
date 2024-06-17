@@ -1,0 +1,6 @@
+.ansible-lint linguist-language=YAML linguist-detectable
+.yamllint linguist-language=YAML linguist-detectable
+*.j2 linguist-detectable
+*.md linguist-documentation linguist-detectable
+*.yml linguist-detectable
+*.yaml linguist-detectable
