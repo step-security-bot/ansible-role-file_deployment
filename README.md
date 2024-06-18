@@ -18,7 +18,6 @@ This is a *very* simple role that will copy files to the managed nodes using `an
 | [![pyspelling](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/pyspelling.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/pyspelling.yml) | |
 | [![markdownlint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/markdownlint.yml) | |
 | [![ansible-lint](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/ansible-lint.yml) | |
-| [![CodeQL](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sscheib/ansible-role-file_deployment/actions/workflows/github-code-scanning/codeql) | |
 <!-- markdownlint-enable MD013 -->
 
 **Note**: The badges don't follow a specific order. Wherever possible, a general badge refers to the corresponding workflow that implements the respective action, which allows
