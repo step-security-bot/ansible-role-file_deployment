@@ -48,10 +48,32 @@ jobs:
           egress-policy: 'block'
           disable-sudo: false
           allowed-endpoints: >
+            9236a389bd48b984df91adc1bc924620.r2.cloudflarestorage.com:443
+            api.github.com:443
+            api.scorecard.dev:443
+            archive.ubuntu.com:80
+            azure.archive.ubuntu.com:80
+            cgr.dev:443
+            contributor-covenant.org:443
+            conventionalcommits.org:443
+            docs.ansible.com:443
+            docs.github.com:443
+            esm.ubuntu.com:443
             files.pythonhosted.org:443
+            galaxy.ansible.com:443
             github.com:443
+            img.shields.io:443
+            motd.ubuntu.com:443
+            packages.microsoft.com:443
+            pre-commit.com:443
+            proxy.golang.org:443
             pypi.org:443
-            raw.githubusercontent.com:443
+            registry.npmjs.org:443
+            security.ubuntu.com:80
+            storage.googleapis.com:443
+            www.contributor-covenant.org:443
+            www.conventionalcommits.org:443
+            www.gnu.org:443
 
       - name: 'Checkout repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
