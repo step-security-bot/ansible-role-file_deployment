@@ -71,12 +71,6 @@ jobs:
           mkdir -p "${cache_dir}"
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
 
-          # Unfortunately, the permissions expected within renovate's docker container
-          # are different than the ones given after the cache is restored. We have to
-          # change ownership to solve this. We also need to have correct permissions in
-          # the entire /tmp/renovate tree, not just the section with the repo cache.
-          ls -R "${cache_dir}"
-
       - name: 'Install aspell'
         run: 'sudo apt-get update && sudo apt-get install -y aspell aspell-en'
 
@@ -93,14 +87,10 @@ jobs:
 
       - name: 'Run pre-commit'
         run: |
-          set -x
           export PRE_COMMIT_HOME="${cache_dir}"
           if [[ -f "${hook_skip_file}" ]]; then
             export SKIP="$(tr '\n' ',' < "${hook_skip_file}")"
-            echo "${SKIP}"
           fi
-          env
-          ls -la "${PRE_COMMIT_HOME}" || true
           pre-commit run --verbose --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
