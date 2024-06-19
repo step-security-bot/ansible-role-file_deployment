@@ -95,7 +95,7 @@ jobs:
         run: |
           set -x
           if [[ -f "${hook_skip_file}" ]]; then
-            hooks="$(cat "${hook_skip_file}" | xargs)"
+            hooks="$(xargs < "${hook_skip_file}")"
             export SKIP="${hooks}"
             echo "${SKIP}"
           fi
