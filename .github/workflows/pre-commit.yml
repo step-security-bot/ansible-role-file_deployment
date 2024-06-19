@@ -101,7 +101,7 @@ jobs:
             echo "${SKIP}"
           fi
           env
-          ls -la $PRE_COMMIT_HOME || true
+          ls -la "${PRE_COMMIT_HOME}" || true
           pre-commit run --verbose --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
