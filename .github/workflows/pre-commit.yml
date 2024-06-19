@@ -95,7 +95,6 @@ jobs:
 
       - name: 'Compress pre-commit cache to improve performance'
         run: |
-          ls "${cache_dir}"
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
           tar -czf "${cache_archive}" -C "${cache_dir}" .
