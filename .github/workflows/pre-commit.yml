@@ -95,7 +95,8 @@ jobs:
         run: |
           set -x
           if [[ -f "${hook_skip_file}" ]]; then
-            export SKIP="$(cat "${hook_skip_file}" | xargs)"
+            hooks="$(cat "${hook_skip_file}" | xargs)"
+            export SKIP="${hooks}"
             echo "${SKIP}"
           fi
           pre-commit run --all-files --show-diff-on-failure
