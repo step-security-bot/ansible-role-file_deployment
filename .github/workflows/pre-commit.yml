@@ -33,18 +33,8 @@ env:
   cache_dir: '~/.cache/pre-commit'
   # This can be manually changed to bust the cache if neccessary.
   cache_key: 'pre-commit-cache'
-  skip_hooks: >-
-    actionlint
-    ansible-lint
-    check-github-workflows
-    check-renovate
-    commitlint
-    gitleaks
-    kics-scan
-    markdown-link-check
-    markdownlint
-    pyspelling
-    yamllint
+  # File that contains the pre-commit hooks to skip
+  hook_skip_file: './.github/.pre-commit-skip-hooks'
 
 jobs:
   pre-commit:
@@ -104,8 +94,8 @@ jobs:
       - name: 'Run pre-commit'
         run: |
           set -x
-          if [[ -n "${skip_hooks}" ]]; then
-            export SKIP="$(echo "${skip_hooks}" | tr -d '\n' | tr -d "'")"
+          if [[ -f "${hook_skip_file}" ]]; then
+            export SKIP="$(cat "${hook_skip_file}" | xargs)"
             echo "${SKIP}"
           fi
           pre-commit run --all-files --show-diff-on-failure
