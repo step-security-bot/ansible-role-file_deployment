@@ -98,7 +98,7 @@ jobs:
           ls "${cache_dir}"
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
-          tar -czvf "${cache_archive}" -C "${cache_dir}" .
+          tar -czf "${cache_archive}" -C "${cache_dir}" .
 
       - name: 'Upload compressed cache'
         uses: 'actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808' # v4.3.3
