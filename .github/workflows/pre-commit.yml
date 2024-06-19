@@ -30,7 +30,7 @@ env:
   # If we set our own directory via cacheDir, we can run into permissions issues.
   # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
   # time gets faster, it also takes longer to upload the cache as it grows bigger.
-  cache_dir: '~/.cache/pre-commit'
+  cache_dir: '/tmp/.cache/pre-commit'
   # This can be manually changed to bust the cache if neccessary.
   cache_key: 'pre-commit-cache'
   # File that contains the pre-commit hooks to skip
@@ -90,16 +90,20 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip3 install pre-commit
+          mkdir -p '${cache_dir}'
 
       - name: 'Run pre-commit'
         run: |
           set -x
+          export PRE_COMMIT_HOME="${cache_dir}"
           if [[ -f "${hook_skip_file}" ]]; then
             hooks="$(xargs < "${hook_skip_file}")"
             export SKIP="${hooks}"
             echo "${SKIP}"
           fi
-          pre-commit run --all-files --show-diff-on-failure
+          env
+          ls -la $PRE_COMMIT_HOME || true
+          pre-commit run --verbose --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
         run: |
