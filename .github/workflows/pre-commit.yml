@@ -105,10 +105,10 @@ jobs:
         run: |
           set -x
           if [[ -n "${skip_hooks}" ]]; then
-            SKIP="$(echo "${skip_hooks}" | tr -d '\n')" pre-commit run --all-files --show-diff-on-failure
-          else
-            pre-commit run --all-files --show-diff-on-failure
+            export SKIP="$(echo "${skip_hooks}" | tr -d '\n')"
+            echo "${SKIP}"
           fi
+          pre-commit run --all-files --show-diff-on-failure
 
       - name: 'Compress pre-commit cache to improve performance'
         run: |
