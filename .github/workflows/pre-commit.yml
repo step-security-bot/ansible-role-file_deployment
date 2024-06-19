@@ -97,8 +97,7 @@ jobs:
           set -x
           export PRE_COMMIT_HOME="${cache_dir}"
           if [[ -f "${hook_skip_file}" ]]; then
-            hooks="$(xargs < "${hook_skip_file}")"
-            export SKIP="${hooks}"
+            export SKIP="$(tr '\n' ',' < "${hook_skip_file}")"
             echo "${SKIP}"
           fi
           env
