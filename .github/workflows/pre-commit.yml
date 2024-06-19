@@ -75,7 +75,7 @@ jobs:
           # are different than the ones given after the cache is restored. We have to
           # change ownership to solve this. We also need to have correct permissions in
           # the entire /tmp/renovate tree, not just the section with the repo cache.
-          # sudo chown -R "runneradmin:root" "/tmp/renovate/"
+          sudo chown -R "runneradmin:root" "${cache_dir}"
           ls -R "${cache_dir}"
 
       - name: 'Install aspell'
@@ -90,7 +90,8 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip3 install pre-commit
-          mkdir -p '${cache_dir}'
+          mkdir -pv '${cache_dir}'
+          sudo chown -R "runneradmin:root" "${cache_dir}"
 
       - name: 'Run pre-commit'
         run: |
