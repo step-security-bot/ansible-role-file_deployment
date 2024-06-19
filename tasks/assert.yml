@@ -1,7 +1,7 @@
 ---
 # NOTE: _fd_quiet_assert does not impact this task, as it first needs to be ensured that it actually is
 #       properly defined
-- name: 'Ensure mandatory variables, as well as variables, which have a default value, are set (boolean)'
+- name: 'assert | Ensure mandatory variables, as well as variables, which have a default value, are set (boolean)'
   ansible.builtin.assert:
     that:
       - "lookup('ansible.builtin.vars', __t_var) is defined"
@@ -15,7 +15,7 @@
     loop_var: '__t_var'
     label: 'variable: {{ __t_var }}'
 
-- name: 'Ensure _fd_packages is defined properly'
+- name: 'assert | Ensure _fd_packages is defined properly'
   ansible.builtin.assert:
     that:
       # destination is defined for all items

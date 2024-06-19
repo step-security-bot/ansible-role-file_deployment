@@ -6,13 +6,6 @@ enable_list:
   - 'no-same-owner'
   - 'name[prefix]'
 
-kinds:
-  - yaml: '.ansible-lint'
-  - yaml: '.github/workflows/*.{yml,yaml}'
-  - yaml: '.pre-commit-config.yaml'
-  - yaml: '.yamllint'
-  - yaml: '**/*.{yml,yaml}'
-
 loop_var_prefix: '^(__|{role}_)'
 max_block_depth: 20
 offline: true
