@@ -105,7 +105,7 @@ jobs:
         run: |
           set -x
           if [[ -n "${skip_hooks}" ]]; then
-            export SKIP="$(echo "${skip_hooks}" | tr -d '\n')"
+            export SKIP="$(echo "${skip_hooks}" | tr -d '\n' | tr -d "'")"
             echo "${SKIP}"
           fi
           pre-commit run --all-files --show-diff-on-failure
