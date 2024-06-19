@@ -91,7 +91,6 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install pre-commit
           mkdir -pv "${cache_dir}"
-          sudo chown -R "runneradmin:root" "${cache_dir}"
 
       - name: 'Run pre-commit'
         run: |
