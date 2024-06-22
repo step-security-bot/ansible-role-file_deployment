@@ -40,8 +40,12 @@ jobs:
 
       - name: 'Install commitlint'
         run: |
-          npm install conventional-changelog-conventionalcommits
-          npm install commitlint@latest
+          # renovate: datasource=npm
+          npm install conventional-changelog-conventionalcommits@8.0.0
+          # renovate: datasource=npm
+          npm install commitlint@19.3.0
+          # renovate: datasource=npm
+          npm install commitlint-plugin-selective-scope@1.0.1
 
       - name: 'Validate current commit (last commit) with commitlint'
         if: "github.event_name == 'push'"

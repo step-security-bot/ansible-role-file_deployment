@@ -24,7 +24,8 @@ repos:
           - 'pre-commit'
         additional_dependencies:
           # https://github.com/pre-commit/pre-commit/issues/1526
-          - 'ansible-core>=2.15'
+          # renovate: datasource=pypi
+          - 'ansible-core==2.16.8'
         always_run: true
         description: 'This hook runs ansible-lint.'
         entry: 'python3 -m ansiblelint -v --force-color'
@@ -134,8 +135,10 @@ repos:
         stages:
           - 'commit-msg'
         additional_dependencies:
-          - 'conventional-changelog-conventionalcommits'
-          - 'commitlint-plugin-selective-scope'
+          # renovate: datasource=npm
+          - 'conventional-changelog-conventionalcommits@8.0.0'
+          # renovate: datasource=npm
+          - 'commitlint-plugin-selective-scope@1.0.1'
 
   - repo: 'https://github.com/pre-commit/mirrors-jshint'
     rev: 'v2.13.6'
