@@ -171,13 +171,6 @@ repos:
         stages:
           - 'pre-commit'
 
-      - id: 'check-renovate'
-        args:
-          - '--verbose'
-        verbose: true
-        stages:
-          - 'pre-commit'
-
   - repo: 'https://github.com/rhysd/actionlint'
     rev: 'v1.7.1'
     hooks:
@@ -216,4 +209,9 @@ repos:
         verbose: true
         stages:
           - 'pre-commit'
+
+  - repo: 'https://github.com/renovatebot/pre-commit-hooks'
+    rev: '37.414.1'
+    hooks:
+      - id: 'renovate-config-validator'
 ...
