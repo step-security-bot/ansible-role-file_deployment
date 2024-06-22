@@ -56,14 +56,17 @@ fd_files:
     mode: '0400'
 ```
 
-The attributes `dest`, `owner`, `group` and `mode` are required as well as either `src` or `content`. These attributes are validated for their *existence*. The permission
-attributes are deliberately enforced (although `ansible.builtin.copy` does not require them) to avoid accidental unsafe file deployments which have too broad permissions.
-This way, a user needs to consciously decide to set broad permissions.
+The attributes `dest`, `owner`, `group` and `mode` are required as well as either `src` or `content`.
 
-The variables are **not** validated whether they have the correct type, etc. The only validation is the aforementioned existence of the attributes.
+The permission attributes are deliberately enforced (although `ansible.builtin.copy` does not require them) to avoid accidental unsafe file deployments which have too
+broad permissions. This way, a user needs to consciously decide to set broad permissions.
 
-This role supports all attributes of [`ansible.builtin.copy`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html) which are supported at
-the time of this writing (04.02.2024).
+Type validation for each variable and/or variable option is done using
+[Role argument validation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation). The corresponding specification is
+defined in [`meta/argument_specs.yml`](meta/argument_specs.yml).
+
+This role supports all attributes of [`ansible.builtin.copy`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html) being passed in as option
+in `fd_files`.
 
 ## Dependencies
 
