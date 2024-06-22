@@ -62,11 +62,15 @@ The permission attributes are deliberately enforced (although `ansible.builtin.c
 broad permissions. This way, a user needs to consciously decide to set broad permissions.
 
 Type validation for each variable and/or variable option is done using
-[Role argument validation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation). The corresponding specification is
+[role argument validation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation). The corresponding specification is
 defined in [`meta/argument_specs.yml`](meta/argument_specs.yml).
 
 This role supports all attributes of [`ansible.builtin.copy`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html) being passed in as option
 in `fd_files`.
+
+The role's argument specification does not replicate all the documentation specified in `ansible.builtin.copy` as it is mainly used for type checking and type enforcement.
+The complete documentation of each of the options possible can be reviewed at the
+[documentation of `ansible.builtin.copy`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html)
 
 ## Dependencies
 
