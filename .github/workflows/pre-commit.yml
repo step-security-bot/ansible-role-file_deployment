@@ -72,7 +72,9 @@ jobs:
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
 
       - name: 'Install aspell'
-        run: 'sudo apt-get update && sudo apt-get install -y aspell aspell-en'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aspell aspell-en
 
       - name: 'Install Python'
         uses: 'actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d' # v5.1.0
@@ -81,8 +83,8 @@ jobs:
 
       - name: 'Install pre-commit'
         run: |
-          python3 -m pip install --upgrade pip
-          pip3 install pre-commit
+          # renovate: datasource=pypi
+          pip3 install pre-commit==3.7.1
           mkdir -pv "${cache_dir}"
 
       - name: 'Run pre-commit'
