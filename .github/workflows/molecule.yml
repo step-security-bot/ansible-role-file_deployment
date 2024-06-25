@@ -45,28 +45,23 @@ jobs:
     strategy:
       matrix:
         ansible_version:
+          - '2.14'
+          - '2.15'
           - '2.16'
-        #  - '2.14'
-        #  - '2.15'
-        #  - '2.17'
+          - '2.17'
         python_version:
+          - '3.6'
+          - '3.7'
+          - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
           - '3.12'
-        #  - '3.6'
-        #  - '3.7'
-        #  - '3.8'
-        #  - '3.9'
-        #  - '3.10'
-        #  - '3.11'
-        # exclude:
-        #  - ansible_version: '2.17'
-        #    python_version: '3.6'
+        exclude:
+          - ansible_version: '2.17'
+            python_version: '3.6'
 
     steps:
-      - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
-        with:
-          egress-policy: 'audit'
-
       - name: 'Install NodeJS'
         run: 'dnf install nodejs -y'
 
@@ -107,7 +102,7 @@ jobs:
 
       - name: 'Run molecule'
         run: |
-          ANSIBLE_VERBOSITY=4 molecule -v --debug test
+          molecule test
 
       - name: 'Compress molecule cache to improve performance'
         run: |
