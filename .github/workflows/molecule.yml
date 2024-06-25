@@ -45,21 +45,21 @@ jobs:
     strategy:
       matrix:
         ansible_version:
-          - '2.14'
-          - '2.15'
+        #  - '2.14'
+        #  - '2.15'
           - '2.16'
           - '2.17'
         python_version:
-          - '3.6'
-          - '3.7'
-          - '3.8'
-          - '3.9'
-          - '3.10'
+        #  - '3.6'
+        #  - '3.7'
+        #  - '3.8'
+        #  - '3.9'
+        #  - '3.10'
           - '3.11'
           - '3.12'
-        exclude:
-          - ansible_version: '2.17'
-            python_version: '3.6'
+        # exclude:
+        #  - ansible_version: '2.17'
+        #    python_version: '3.6'
 
     steps:
       - name: 'Install NodeJS'
@@ -73,7 +73,7 @@ jobs:
         if: "github.event.inputs.repoCache != 'disabled'"
         continue-on-error: true
         with:
-          name: '${{ env.cache_key }}'
+          name: '${{ env.cache_key }}-python_${{ matrix.python_version }}-ansible_core_${{ matrix.ansible_version }}'
           path: 'cache-download'
 
       - name: 'Extract molecule cache to improve performance'
@@ -114,7 +114,7 @@ jobs:
         uses: 'actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808' # v4.3.3
         if: "github.event.inputs.repoCache != 'disabled'"
         with:
-          name: '${{ env.cache_key }}'
+          name: '${{ env.cache_key }}-python_${{ matrix.python_version }}-ansible_core_${{ matrix.ansible_version }}'
           path: '${{ env.cache_archive }}'
           # Since this is updated and restored on every run, we don't need to keep it
           # for long. Just make sure this value is large enough that multiple renovate
