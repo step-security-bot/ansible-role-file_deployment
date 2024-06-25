@@ -39,7 +39,9 @@ jobs:
     permissions:
       contents: 'write'
     runs-on: 'ubuntu-latest'
-    container: 'registry.access.redhat.com/ubi8/podman'
+    container:
+      image: 'registry.access.redhat.com/ubi8/podman'
+      options: '--privileged'
     strategy:
       matrix:
         ansible_version:
