@@ -48,14 +48,14 @@ jobs:
     strategy:
       matrix:
         container:
-          # RHEL 8
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16'
+          # yamllint disable-line rule:line-length
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:22e6773b832d01602a6d822f8c947c79d46c6b932a466874776929adf39e7ed2' # 2.16.8-1
             molecule: '24.6.0'
             cache_key_suffix: '2.16'
 
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
-            molecule: '6.0.3'
-            cache_key_suffix: '2.15'
+          # - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
+          #   molecule: '6.0.3'
+          #   cache_key_suffix: '2.15'
 
     steps:
       - name: 'Install NodeJS and podman'
