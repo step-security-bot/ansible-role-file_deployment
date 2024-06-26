@@ -4,7 +4,12 @@ dependency:
   options:
     requirements-file: 'requirements.yml'
 
+verifier:
+  name: 'ansible'
+  enabled: true
+
 driver:
+  name: 'default'
   options:
     managed: false
     login_cmd_template: 'podman exec -it {instance} bash'
