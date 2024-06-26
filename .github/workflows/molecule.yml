@@ -40,7 +40,7 @@ jobs:
       contents: 'write'
     runs-on: 'ubuntu-latest'
     container:
-      image: '${{ matrix.container }}'
+      image: '${{ matrix.container.image }}'
       credentials:
         username: '${{ secrets.crc_username }}'
         password: '${{ secrets.crc_password }}'
@@ -48,18 +48,14 @@ jobs:
     strategy:
       matrix:
         container:
-          # RHEL 9
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16'
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.15'
           # RHEL 8
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16'
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16'
+            molecule: '24.6.0'
 
     steps:
       - name: 'Extract Ansible Core version of the image'
         run: |
-          ansible_version="$( "${{ matrix.container }}" | awk -F ':' '{ print $2 }')"
+          ansible_version="$( "${{ matrix.container.image }}" | awk -F ':' '{ print $2 }')"
           echo "ansible_version=${ansible_version}" >> "${GITHUB_ENV}"
 
       - name: 'Install NodeJS and podman'
@@ -96,7 +92,7 @@ jobs:
       - name: 'Install Python packages'
         run: |
           # renovate: datasource=pypi
-          pip3 install molecule==24.6.0
+          pip3 install molecule==${{ matrix.container.molecule }}
           mkdir -pv "${cache_dir}"
 
       - name: 'Run molecule'
