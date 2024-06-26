@@ -49,14 +49,16 @@ jobs:
       matrix:
         container:
           # yamllint disable-line rule:line-length
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7' # 2.17.1-1
+            cache_key_suffix: '2.17'
+            # renovate: datasource=pypi
+            molecule: '6.0.3'
+
+          # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:22e6773b832d01602a6d822f8c947c79d46c6b932a466874776929adf39e7ed2' # 2.16.8-1
-            molecule: '24.6.0'
             cache_key_suffix: '2.16'
-
-          # - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
-          #   molecule: '6.0.3'
-          #   cache_key_suffix: '2.15'
-
+            # renovate: datasource=pypi
+            molecule: '6.0.3'
     steps:
       - name: 'Install NodeJS and podman'
         run: 'microdnf install nodejs podman -y'
@@ -73,6 +75,7 @@ jobs:
           path: 'cache-download'
 
       - name: 'Extract molecule cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           set -x
           # Skip if no cache is set, such as the first time it runs.
@@ -85,10 +88,6 @@ jobs:
           mkdir -p "${cache_dir}"
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
 
-#      - name: 'Install Python'
-#        run: |
-#          dnf install -y python${{ matrix.python_version }} python${{ matrix.python_version }}-pip
-
       - name: 'Install Python packages'
         run: |
           pip3 install molecule==${{ matrix.container.molecule }}
@@ -99,6 +98,7 @@ jobs:
           molecule test
 
       - name: 'Compress molecule cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           # The -C is important, as otherwise we end up extracting the files with
           # their full path, ultimately leading to a nested directory situation.
