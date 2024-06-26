@@ -89,8 +89,8 @@ jobs:
 #            python_version: '3.9'
 
     steps:
-      - name: 'Install NodeJS'
-        run: 'microdnf install nodejs -y'
+      - name: 'Install NodeJS and podman'
+        run: 'microdnf install nodejs podman -y'
 
       - name: 'Checkout repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
