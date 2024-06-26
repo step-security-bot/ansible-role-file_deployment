@@ -51,11 +51,12 @@ jobs:
           # RHEL 9
           - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16'
           - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.15'
-          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.14'
           # RHEL 8
           - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16'
           - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
           - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.14'
+          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.13'
+          - 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.12'
 
     steps:
       - name: 'Extract Ansible Core version of the image'
