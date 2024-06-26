@@ -52,10 +52,13 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.16'
             molecule: '24.6.0'
 
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:2.15'
+            molecule: '6.0.3'
+
     steps:
       - name: 'Extract Ansible Core version of the image'
         run: |
-          ansible_version="$( "${{ matrix.container.image }}" | awk -F ':' '{ print $2 }')"
+          ansible_version="$(echo "${{ matrix.container.image }}" | awk -F ':' '{ print $2 }')"
           echo "ansible_version=${ansible_version}" >> "${GITHUB_ENV}"
 
       - name: 'Install NodeJS and podman'
