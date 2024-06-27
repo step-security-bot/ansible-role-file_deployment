@@ -48,17 +48,21 @@ jobs:
     strategy:
       matrix:
         container:
+          #
+          # UBI 8
+          #
+
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:fa661580efb29a119489b71bc28e286a3f38bee89f312b756f3c0d4fd1df88c7' # 2.17.1-1
             cache_key_suffix: 'rhel8-2.17'
             # renovate: datasource=pypi
-            molecule: '6.0.3'
+            molecule: '24.6.0'
 
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:22e6773b832d01602a6d822f8c947c79d46c6b932a466874776929adf39e7ed2' # 2.16.8-1
             cache_key_suffix: 'rhel8-2.16'
             # renovate: datasource=pypi
-            molecule: '6.0.3'
+            molecule: '24.6.0'
 
           # yamllint disable-line rule:line-length
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:c2dc04febc41529e0731dc84d01cae5200f5f6c41d61d38c7e8a527f9cc9d81a' # 2.15.10-7
@@ -77,6 +81,35 @@ jobs:
             cache_key_suffix: 'rhel8-2.13'
             # renovate: datasource=pypi
             molecule: '6.0.3'
+
+          #
+          # UBI 9
+          #
+
+          # yamllint disable-line rule:line-length
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9@sha256:396cd568af193191dca7d1ba059cfd5c5f98e20b2e96c16e2b5e4559c5178e8e' # 2.17.1-2
+            cache_key_suffix: 'rhel9-2.17'
+            # renovate: datasource=pypi
+            molecule: '24.6.0'
+            additional_packages:
+              - 'python-unversioned-command'
+
+          # yamllint disable-line rule:line-length
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9@sha256:e9275730bdc733cb7af7100973c61241b04c07968cea24c7a3368c806ca08a82' # 2.16.8-2
+            cache_key_suffix: 'rhel9-2.16'
+            # renovate: datasource=pypi
+            molecule: '24.6.0'
+            additional_packages:
+              - 'python-unversioned-command'
+
+          # yamllint disable-line rule:line-length
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9@sha256:3134d816655b0f4bb072cb0cd27ac7217ee8e2f0ec0f5569db1bbdd8d9a25bb8' # 2.15.11-2
+            cache_key_suffix: 'rhel9-2.15'
+            # renovate: datasource=pypi
+            molecule: '6.0.3'
+            additional_packages:
+              - 'python-unversioned-command'
+
     steps:
       - name: 'Install NodeJS and podman'
         run: 'microdnf install nodejs podman -y'
@@ -105,6 +138,11 @@ jobs:
           # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
           mkdir -p "${cache_dir}"
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
+
+      - name: 'Install additional packages'
+        if: "toJSON(matrix.container.additional_packages) != '{}'"
+        run: |
+          microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
 
       - name: 'Install Python packages'
         run: |
