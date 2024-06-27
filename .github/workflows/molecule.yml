@@ -82,7 +82,7 @@ jobs:
           - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:c218165f4dc0280efb55385276fe644e3f0e420b3076fc91f4dfac8e9c3baa64' # 2.12.10-42
             cache_key_suffix: 'rhel8-2.12'
             # renovate: datasource=pypi
-            molecule: '6.0.3'
+            molecule: '4.0.4'
     steps:
       - name: 'Install NodeJS and podman'
         run: 'microdnf install nodejs podman -y'
