@@ -140,7 +140,7 @@ jobs:
           tar -xzf "cache-download/${cache_archive}" -C "${cache_dir}"
 
       - name: 'Install additional packages'
-        if: "toJSON(matrix.container.additional_packages) != '{}'"
+        if: "join(matrix.container.additional_packages, ' ') != ''"
         run: |
           microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
 
