@@ -1,6 +1,8 @@
 module.exports = {
   secrets: {
     AUTOMATION_HUB_AUTH_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_AUTH_TOKEN,
+    CRC_USERNAME: process.env.RENOVATE_CRC_USERNAME,
+    CRC_PASSWORD: process.env.RENOVATE_CRC_PASSWORD,
   },
   allowedHeaders: [
     'Authorization',
@@ -15,7 +17,17 @@ module.exports = {
         'https://console.redhat.com/api/automation-hub/content/published/',
         'https://console.redhat.com/api/automation-hub/content/validated/',
         'https://galaxy.ansible.com',
-      ]
+      ],
+    },
+    {
+      matchDatasources: [
+        'docker',
+      ],
+      registryUrls: [
+        'docker.io',
+        'ghrc.io',
+        'registry.redhat.io',
+      ],
     },
   ],
   hostRules: [
@@ -30,6 +42,11 @@ module.exports = {
       headers: {
         Authorization: 'Bearer {{ secrets.AUTOMATION_HUB_AUTH_TOKEN }}',
       },
+    },
+    {
+      matchHost: 'registry.redhat.io',
+      username: '{{ secrets.CRC_USERNAME }}',
+      password: '{{ secrets.CRC_PASSWORD }}',
     },
   ],
 };
