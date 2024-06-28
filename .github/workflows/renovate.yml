@@ -23,6 +23,11 @@ on:  # yamllint disable-line rule:truthy
           - 'error'
           - 'fatal'
 
+  # TEMP
+  pull_request:
+    branches:
+      - 'main'
+
   schedule:
     - cron: '0 */3 * * *'
 
@@ -136,6 +141,8 @@ jobs:
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
+          RENOVATE_CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
+          RENOVATE_CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
           LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'info' }}"
 
       - name: 'Compress Renovate cache to improve performance'
