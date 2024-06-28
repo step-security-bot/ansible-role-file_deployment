@@ -35,6 +35,17 @@
         "enabled": true
       },
       "rangeStrategy": "bump"
+    },
+    {
+      "matchDatasources": [
+        "galaxy-collection"
+      ],
+      "matchDepNames": [
+        "containers.podman"
+      ],
+      "registryUrls": [
+        "https://galaxy.ansible.com"
+      ]
     }
   ],
   "pre-commit": {
