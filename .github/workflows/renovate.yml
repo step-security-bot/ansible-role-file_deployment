@@ -143,7 +143,7 @@ jobs:
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
           RENOVATE_CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
           RENOVATE_CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
-          LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'info' }}"
+          LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'debug' }}"
 
       - name: 'Compress Renovate cache to improve performance'
         if: "github.event.inputs.repoCache != 'disabled'"
