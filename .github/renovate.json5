@@ -8,6 +8,8 @@
   "assignees": [
     "sscheib"
   ],
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
   "packageRules": [
     {
       "matchFileNames": [
