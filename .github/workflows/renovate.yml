@@ -15,13 +15,18 @@ on:  # yamllint disable-line rule:truthy
       renovateLogLevel:
         description: 'Renovate Log Level'
         type: 'choice'
-        default: 'info'
+        default: 'debug'
         options:
           - 'debug'
           - 'info'
           - 'warn'
           - 'error'
           - 'fatal'
+
+  # TEMP
+  pull_request:
+    branches:
+      - 'main'
 
   schedule:
     - cron: '0 */3 * * *'
@@ -59,6 +64,7 @@ jobs:
             pkg-containers.githubusercontent.com:443
             pypi.org:443
             registry.npmjs.org:443
+            registry.redhat.io:443
             sso.redhat.com:443
 
       - name: 'Checkout the repository'
@@ -136,7 +142,9 @@ jobs:
         env:
           RENOVATE_REPOSITORY_CACHE: "${{ github.event.inputs.repoCache || 'enabled' }}"
           RENOVATE_REPOSITORIES: '${{ github.repository }}'
-          LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'info' }}"
+          RENOVATE_CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
+          RENOVATE_CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
+          LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'debug' }}"
 
       - name: 'Compress Renovate cache to improve performance'
         if: "github.event.inputs.repoCache != 'disabled'"
