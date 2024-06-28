@@ -23,11 +23,6 @@ on:  # yamllint disable-line rule:truthy
           - 'error'
           - 'fatal'
 
-  # TEMP
-  pull_request:
-    branches:
-      - 'main'
-
   schedule:
     - cron: '0 */3 * * *'
 
