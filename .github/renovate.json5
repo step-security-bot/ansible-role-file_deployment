@@ -2,13 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":disableDependencyDashboard",
     "helpers:pinGitHubActionDigests",
     "docker:pinDigests"
   ],
   "assignees": [
     "sscheib"
   ],
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
   "packageRules": [
     {
       "matchFileNames": [
@@ -46,7 +47,7 @@
         "^.github/workflows/molecule\.ya?ml$"
       ],
       "matchStrings": [
-        "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"]+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"
+        "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"
       ],
       "autoReplaceStringTemplate": "image: '\{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}\'",
       "datasourceTemplate": "docker"
