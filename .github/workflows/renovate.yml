@@ -15,7 +15,7 @@ on:  # yamllint disable-line rule:truthy
       renovateLogLevel:
         description: 'Renovate Log Level'
         type: 'choice'
-        default: 'info'
+        default: 'debug'
         options:
           - 'debug'
           - 'info'
