@@ -64,7 +64,7 @@ jobs:
             pkg-containers.githubusercontent.com:443
             pypi.org:443
             registry.npmjs.org:443
-            registry.redhatio.io:443
+            registry.redhat.io:443
             sso.redhat.com:443
 
       - name: 'Checkout the repository'
