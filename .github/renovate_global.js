@@ -16,7 +16,6 @@ module.exports = {
       registryUrls: [
         'https://console.redhat.com/api/automation-hub/content/published/',
         'https://console.redhat.com/api/automation-hub/content/validated/',
-        'https://galaxy.ansible.com',
       ],
     },
   ],
