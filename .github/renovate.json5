@@ -66,6 +66,18 @@
         "https://console.redhat.com/api/automation-hub/content/published/",
         "https://console.redhat.com/api/automation-hub/content/validated/"
       ]
+    },
+    {
+      "matchDatasources": [
+        "pypi"
+      ],
+      "matchPackageNames": [
+        "molecule"
+      ],
+      "matchCurrentVersion": "<7.0.0",
+      "major": {
+        "enabled": false
+      }
     }
   ],
   "pre-commit": {
@@ -90,7 +102,7 @@
         "^.github/workflows/.*?\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+-\\s+['\"]?(?<depName>[^=@:]+)(?:(?:==|@|:)\\s?(?<currentValue>[^'\"\\s]*))?"
+        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+-?\\s+['\"]?(?<depName>[^=@:]+)(?:(?:==|@|:)+\\s?\'?(?<currentValue>[^'\"\\s]*))?"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
