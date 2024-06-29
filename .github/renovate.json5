@@ -46,6 +46,21 @@
       "registryUrls": [
         "https://galaxy.ansible.com"
       ]
+    },
+    {
+      "matchDepNames": [
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
+      ],
+      "major": {
+        "enabled": false
+      },
+      "minor": {
+        "enabled": false
+      },
+      "patch": {
+        "enabled": true
+      }
     }
   ],
   "pre-commit": {
