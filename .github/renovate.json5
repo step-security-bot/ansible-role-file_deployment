@@ -37,17 +37,6 @@
       "rangeStrategy": "bump"
     },
     {
-      "matchDatasources": [
-        "galaxy-collection"
-      ],
-      "matchDepNames": [
-        "containers.podman"
-      ],
-      "registryUrls": [
-        "https://galaxy.ansible.com"
-      ]
-    },
-    {
       "matchDepNames": [
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
