@@ -19,16 +19,6 @@ module.exports = {
         'https://galaxy.ansible.com',
       ],
     },
-    {
-      matchDatasources: [
-        'docker',
-      ],
-      registryUrls: [
-        'docker.io',
-        'ghrc.io',
-        'registry.redhat.io',
-      ],
-    },
   ],
   hostRules: [
     {
