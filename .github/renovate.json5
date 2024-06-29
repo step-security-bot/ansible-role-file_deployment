@@ -50,6 +50,22 @@
       "patch": {
         "enabled": true
       }
+    },
+    {
+      "matchDatasources": [
+        "galaxy-collections"
+      ],
+      "matchDepNames": [
+        "ansible.controller",
+        "ansible.posix",
+        "ansible.utils",
+        "redhat.satellite",
+        "zabbix.zabbix"
+      ],
+      "registryUrls": [
+        "https://console.redhat.com/api/automation-hub/content/published/",
+        "https://console.redhat.com/api/automation-hub/content/validated/"
+      ]
     }
   ],
   "pre-commit": {
