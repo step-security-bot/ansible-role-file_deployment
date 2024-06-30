@@ -12,39 +12,6 @@
   "dependencyDashboardOSVVulnerabilitySummary": "all",
   "packageRules": [
     {
-      "matchDepNames": [
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
-      ],
-      "major": {
-        "enabled": false
-      },
-      "minor": {
-        "enabled": false
-      },
-      "patch": {
-        "enabled": true
-      },
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
-      "rangeStrategy": "bump"
-    },
-    {
-      "matchDatasources": [
-        "galaxy-collections"
-      ],
-      "matchDepNames": [
-        "ansible.controller",
-        "ansible.posix",
-        "ansible.utils",
-        "redhat.satellite",
-        "zabbix.zabbix"
-      ],
-      "registryUrls": [
-        "https://console.redhat.com/api/automation-hub/content/published/",
-        "https://console.redhat.com/api/automation-hub/content/validated/"
-      ]
-    },
-    {
       "matchFileNames": [
         ".github/workflows/*.yml",
         "collections/requirements.yml",
@@ -84,6 +51,39 @@
       "major": {
         "enabled": false
       }
+    },
+    {
+      "matchDepNames": [
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
+      ],
+      "major": {
+        "enabled": false
+      },
+      "minor": {
+        "enabled": false
+      },
+      "patch": {
+        "enabled": true
+      },
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchDatasources": [
+        "galaxy-collections"
+      ],
+      "matchDepNames": [
+        "ansible.controller",
+        "ansible.posix",
+        "ansible.utils",
+        "redhat.satellite",
+        "zabbix.zabbix"
+      ],
+      "registryUrls": [
+        "https://console.redhat.com/api/automation-hub/content/published/",
+        "https://console.redhat.com/api/automation-hub/content/validated/"
+      ]
     }
   ],
   "pre-commit": {
