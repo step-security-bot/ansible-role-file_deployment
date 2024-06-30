@@ -95,7 +95,7 @@ jobs:
               - 'python-unversioned-command'
 
           # yamllint disable-line rule:line-length
-          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.8@sha256:e9275730bdc733cb7af7100973c61241b04c07968cea24c7a3368c806ca08a82'
+          - image: 'registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.16.7'
             cache_key_suffix: 'rhel9-2.16'
             # renovate: datasource=pypi
             molecule: '24.6.0'
