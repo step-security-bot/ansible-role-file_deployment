@@ -12,31 +12,6 @@
   "dependencyDashboardOSVVulnerabilitySummary": "all",
   "packageRules": [
     {
-      "matchFileNames": [
-        ".github/workflows/*.yml",
-        "collections/requirements.yml",
-        "roles/requirements.yml",
-        "requirements.yml",
-        "requirements.txt"
-      ],
-      "major": {
-        "enabled": true
-      },
-      "minor": {
-        "enabled": true
-      },
-      "rangeStrategy": "bump"
-    },
-    {
-      "matchFileNames": [
-        ".github/workflows/molecule.yml"
-      ],
-      "minor": {
-        "enabled": true
-      },
-      "rangeStrategy": "bump"
-    },
-    {
       "matchDepNames": [
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
@@ -67,6 +42,35 @@
       "registryUrls": [
         "https://console.redhat.com/api/automation-hub/content/published/",
         "https://console.redhat.com/api/automation-hub/content/validated/"
+      ]
+    },
+    {
+      "matchFileNames": [
+        ".github/workflows/*.yml",
+        "collections/requirements.yml",
+        "roles/requirements.yml",
+        "requirements.yml",
+        "requirements.txt"
+      ],
+      "major": {
+        "enabled": true
+      },
+      "minor": {
+        "enabled": true
+      },
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchFileNames": [
+        ".github/workflows/molecule.yml"
+      ],
+      "minor": {
+        "enabled": true
+      },
+      "rangeStrategy": "bump",
+      "excludeDepNames": [
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
       ]
     },
     {
