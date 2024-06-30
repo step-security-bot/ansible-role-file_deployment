@@ -50,7 +50,7 @@
       "patch": {
         "enabled": true
       },
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+(?:-\\d+)?)?$"
+      "versioning": "redhat"
     },
     {
       "matchDatasources": [
