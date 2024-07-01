@@ -100,7 +100,7 @@
         "renovatebot/renovate"
       ],
       "schedule": [
-        "every sunday"
+        "on sunday"
       ]
     }
   ],
