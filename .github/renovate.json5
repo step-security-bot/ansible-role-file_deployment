@@ -121,6 +121,16 @@
         "# renovate yaml: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\s+(?<depName>[^:]+):\\s+?'(?:(?<currentValue>[^'\"\\s]*))?"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^.github/workflows/renovate\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?depName=(?<depName>[^\\s]+)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
