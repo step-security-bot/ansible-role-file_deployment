@@ -130,7 +130,8 @@
       "matchStrings": [
         "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?depName=(?<depName>[^\\s]+)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "registryUrlTemplate": "ghcr.io"
     }
   ]
 }
