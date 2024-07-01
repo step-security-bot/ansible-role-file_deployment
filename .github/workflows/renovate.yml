@@ -26,6 +26,22 @@ on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: '0 */3 * * *'
 
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - '.github/workflows/renovate.yml'
+      - '.github/renovate.json5'
+      - '.github/renovate_global.js'
+
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '.github/workflows/renovate.yml'
+      - '.github/renovate.json5'
+      - '.github/renovate_global.js'
+
 # Declare default permissions as read only
 permissions: 'read-all'
 
@@ -41,11 +57,41 @@ env:
   cache_key: 'renovate-cache'
 
 jobs:
+  validate-config:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          disable-sudo: true
+          egress-policy: 'block'
+          allowed-endpoints: >
+            github.com:443
+            nodejs.org:443
+            objects.githubusercontent.com:443
+            registry.npmjs.org:443
+
+      - name: 'Checkout the repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Install NodeJS'
+        uses: 'actions/setup-node@v4.0.2'
+        with:
+          # renovate yaml: datasource=node-version
+          node-version: '20.15.0'
+
+      - name: 'Install renovate and run renovate-config-validator'
+        run: |
+          # renovate: datasource=npm
+          npm install renovate@37.421.5
+          npx --yes --package renovate -- renovate-config-validator --strict
+
   renovate:
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'write'
       pull-requests: 'write'
+    needs: 'validate-config'
     steps:
       - name: 'Harden Runner'
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
