@@ -128,10 +128,9 @@
         "^.github/workflows/renovate\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?depName=(?<depName>[^\\s]+)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
+        "# renovate self-update: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>.*?)\\s+renovate-version:\\s'(?<currentValue>[^']*)"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
-      "registryUrlTemplate": "ghcr.io/renovatebot/renovate"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
