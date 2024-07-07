@@ -181,7 +181,7 @@ jobs:
         with:
           # yamllint disable-line rule:line-length
           # renovate self-update: datasource=docker depName=renovatebot/renovate registryUrl=https://ghcr.io
-          renovate-version: '37.421.4'
+          renovate-version: '37.425.1'
           configurationFile: '.github/renovate_global.js'
           token: '${{ secrets.renovate_token }}'
         env:
@@ -199,7 +199,7 @@ jobs:
           tar -czvf "${cache_archive}" -C "${cache_dir}" .
 
       - name: 'Upload compressed cache'
-        uses: 'actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808' # v4.3.3
+        uses: 'actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b' # v4.3.4
         if: "github.event.inputs.repoCache != 'disabled'"
         with:
           name: '${{ env.cache_key }}'
