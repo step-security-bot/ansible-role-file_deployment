@@ -47,14 +47,28 @@ permissions: 'read-all'
 
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
+  # cache for the actual renovate run
   cache_archive: 'renovate_cache.tar.gz'
+
+  # cache for verifying the config
+  cache_config_check_archive: 'renovate_config_cache.tar.gz'
   # This is the dir renovate provides
   # If we set our own directory via cacheDir, we can run into permissions issues.
   # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
   # time gets faster, it also takes longer to upload the cache as it grows bigger.
+
+  # cache for the actual renovate run
   cache_dir: '/tmp/renovate/cache/renovate/repository'
+
+  # cache for verifying the config
+  cache_config_check_dir: '/tmp/renovate/cache/renovate/repository'
+
   # This can be manually changed to bust the cache if neccessary.
+  # cache for the actual renovate run
   cache_key: 'renovate-cache'
+
+  # cache for verifying the config
+  cache_config_check_key: 'renovate-cache'
 
 jobs:
   validate-config:
@@ -74,18 +88,64 @@ jobs:
       - name: 'Checkout the repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
 
+      - name: 'Download cache of the previous workflow run'
+        uses: 'dawidd6/action-download-artifact@bf251b5aa9c2f7eeb574a96ee720e24f801b7c11' # v6
+        if: "github.event.inputs.repoCache != 'disabled'"
+        continue-on-error: true
+        with:
+          name: '${{ env.cache_config_check_key }}'
+          path: 'cache-config-check-download'
+
+      - name: 'Extract Renovate cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
+        run: |
+          set -x
+          # Skip if no cache is set, such as the first time it runs.
+          if [ ! -d cache-config-check-download ] ; then
+            echo "No cache found."
+            exit 0
+          fi
+
+          # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
+          mkdir -p "${cache_config_check_dir}"
+          tar -xzf "cache-config-check-download/${cache_config_check_archive}" -C "${cache_config_check_dir}"
+
+          # Unfortunately, the permissions expected within renovate's docker container
+          # are different than the ones given after the cache is restored. We have to
+          # change ownership to solve this. We also need to have correct permissions in
+          # the entire /tmp/renovate tree, not just the section with the repo cache.
+          sudo chown -R "runneradmin:root" "/tmp/renovate/"
+          ls -R "${cache_config_check_dir}"
+
       - name: 'Install NodeJS'
         uses: 'actions/setup-node@v4.0.2'
         with:
           # renovate dep: datasource=node-version depName=node
           node-version: '20.15.0'
-          cache: 'npm'
 
       - name: 'Install renovate and run renovate-config-validator'
         run: |
           # renovate: datasource=npm
           npm install renovate@37.421.5
           npx --yes --package renovate -- renovate-config-validator --strict
+
+      - name: 'Compress Renovate cache to improve performance'
+        if: "github.event.inputs.repoCache != 'disabled'"
+        run: |
+          # The -C is important, as otherwise we end up extracting the files with
+          # their full path, ultimately leading to a nested directory situation.
+          tar -czvf "${cache_config_check_archive}" -C "${cache_config_check_dir}" .
+
+      - name: 'Upload compressed cache'
+        uses: 'actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b' # v4.3.4
+        if: "github.event.inputs.repoCache != 'disabled'"
+        with:
+          name: '${{ env.cache_config_check_key }}'
+          path: '${{ env.cache_config_check_archive }}'
+          # Since this is updated and restored on every run, we don't need to keep it
+          # for long. Just make sure this value is large enough that multiple renovate
+          # runs can happen before older cache archives are deleted.
+          retention-days: 1
 
   renovate:
     runs-on: 'ubuntu-latest'
