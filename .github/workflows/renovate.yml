@@ -81,7 +81,7 @@ jobs:
       - name: 'Install NodeJS'
         uses: 'actions/setup-node@v4.0.2'
         with:
-          # renovate dep: datasource=node-version depName=node
+          # renovate dep: datasource=npm depName=node
           node-version: '20.15.0'
 
       - name: 'Install renovate and run renovate-config-validator'
