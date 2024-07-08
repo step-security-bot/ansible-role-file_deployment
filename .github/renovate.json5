@@ -150,7 +150,7 @@
         "^.github/workflows/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
+        "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s+[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
