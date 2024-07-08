@@ -68,7 +68,7 @@ env:
   cache_key: 'renovate-cache'
 
   # cache for verifying the config
-  cache_config_check_key: 'renovate-cache'
+  cache_config_check_key: 'renovate-config-check-cache'
 
 jobs:
   validate-config:
