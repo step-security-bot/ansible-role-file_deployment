@@ -144,6 +144,17 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
     {
+      "description": "Extract custom dependency definitions",
+      "customType": "regex",
+      "fileMatch": [
+        "^.github/workflows/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "# renovate dep: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))? depName=(?<depName>[^\\s]+)(?: registryUrl=(?<registryUrl>.*?))?\\s[\\w_:-]+\\s?['\"]?(?<currentValue>[^']*)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
       "description": "Extract renovate container version",
       "customType": "regex",
       "fileMatch": [
