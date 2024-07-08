@@ -61,7 +61,7 @@ env:
   cache_dir: '/tmp/renovate/cache/renovate/repository'
 
   # cache for verifying the config
-  cache_config_check_dir: '/tmp/renovate/cache/renovate/repository'
+  cache_config_check_dir: '~/.npm'
 
   # This can be manually changed to bust the cache if neccessary.
   # cache for the actual renovate run
@@ -109,12 +109,6 @@ jobs:
           # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
           mkdir -p "${cache_config_check_dir}"
           tar -xzf "cache-config-check-download/${cache_config_check_archive}" -C "${cache_config_check_dir}"
-
-          # Unfortunately, the permissions expected within renovate's docker container
-          # are different than the ones given after the cache is restored. We have to
-          # change ownership to solve this. We also need to have correct permissions in
-          # the entire /tmp/renovate tree, not just the section with the repo cache.
-          sudo chown -R "runneradmin:root" "/tmp/renovate/"
           ls -R "${cache_config_check_dir}"
 
       - name: 'Install NodeJS'
@@ -129,7 +123,7 @@ jobs:
           npm install renovate@37.421.5
           npx --yes --package renovate -- renovate-config-validator --strict
 
-      - name: 'Compress Renovate cache to improve performance'
+      - name: 'Compress npm cache to improve performance'
         if: "github.event.inputs.repoCache != 'disabled'"
         run: |
           # The -C is important, as otherwise we end up extracting the files with
