@@ -77,7 +77,7 @@ jobs:
       - name: 'Install NodeJS'
         uses: 'actions/setup-node@v4.0.2'
         with:
-          # renovate yaml: datasource=node-version
+          # renovate dep: datasource=node-version depName=node
           node-version: '20.15.0'
 
       - name: 'Install renovate and run renovate-config-validator'
