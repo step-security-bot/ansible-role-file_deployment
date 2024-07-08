@@ -102,6 +102,15 @@
       "schedule": [
         "on sunday"
       ]
+    },
+    {
+      "description": "Limit NodeJS to minor updates",
+      "matchDepNames": [
+        "node"
+      ],
+      "major": {
+        "enabled": false
+      }
     }
   ],
   "pre-commit": {
