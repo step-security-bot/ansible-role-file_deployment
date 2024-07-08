@@ -47,13 +47,17 @@ permissions: 'read-all'
 
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
+  # cache for the actual renovate run
   cache_archive: 'renovate_cache.tar.gz'
+
   # This is the dir renovate provides
   # If we set our own directory via cacheDir, we can run into permissions issues.
   # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
   # time gets faster, it also takes longer to upload the cache as it grows bigger.
   cache_dir: '/tmp/renovate/cache/renovate/repository'
+
   # This can be manually changed to bust the cache if neccessary.
+  # cache for the actual renovate run
   cache_key: 'renovate-cache'
 
 jobs:
@@ -64,7 +68,7 @@ jobs:
         uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
         with:
           disable-sudo: true
-          egress-policy: 'block'
+          egress-policy: 'audit'
           allowed-endpoints: >
             github.com:443
             nodejs.org:443
