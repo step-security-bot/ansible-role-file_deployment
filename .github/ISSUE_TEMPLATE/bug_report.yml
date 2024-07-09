@@ -31,6 +31,10 @@ body:
       description: >-
         Steps to reproduce the behavior. Please ensure to provide a
         [minimal reproducible example](http://stackoverflow.com/help/mcve)
+      placeholder: |
+        1. Set X to Y
+        2. Run X
+        3. etc.
       render: 'markdown'
     validations:
       required: true
@@ -47,11 +51,11 @@ body:
 
         1. `ansible-galaxy role list`
       placeholder: |
-        1. `ansible --version`
+        1. ansible --version
 
-        1. `ansible-galaxy collection list`
+        2. ansible-galaxy collection list
 
-        1. `ansible-galaxy role list`
+        3. ansible-galaxy role list
       render: 'markdown'
     validations:
       required: true
