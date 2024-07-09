@@ -100,9 +100,9 @@ body:
       description: >-
         Tell us about the environment. e.g. control node/target operating system versions, Python version, etc.
       placeholder: |
-        1. Control node operating system: `RHEL 8.10`
-        2. Target node operating system: `RHEL 9.4`
-        3. Target node Python version: `3.12`
+        1. Control node operating system: RHEL 8.10
+        2. Target node operating system: RHEL 9.4
+        3. Target node Python version: 3.12
         4. etc.
     validations:
       required: true
