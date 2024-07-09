@@ -43,9 +43,9 @@ body:
 
         1. `ansible --version`
 
-        2. `ansible-galaxy collection list`
+        1. `ansible-galaxy collection list`
 
-        3. `ansible-galaxy role list`
+        1. `ansible-galaxy role list`
       render: 'markdown'
     validations:
       required: true
