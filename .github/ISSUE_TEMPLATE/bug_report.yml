@@ -38,11 +38,13 @@ body:
   - type: 'textarea'
     attributes:
       label: 'Ansible, role and collection versions'
-      description: >-
-        Verbatim output between of following commands
+      description: 'Verbatim output between of following commands'
+      placeholder: |
         1. `ansible --version`
-        1. `ansible-galaxy collection list`
-        1. `ansible-galaxy role list`
+
+        2. `ansible-galaxy collection list`
+
+        3. `ansible-galaxy role list`
       render: 'markdown'
     validations:
       required: true
