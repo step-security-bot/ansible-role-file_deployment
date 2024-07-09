@@ -38,8 +38,9 @@ body:
   - type: 'textarea'
     attributes:
       label: 'Ansible, role and collection versions'
-      description: 'Verbatim output between of following commands'
-      placeholder: |
+      description: |
+        Verbatim output between of following commands
+
         1. `ansible --version`
 
         2. `ansible-galaxy collection list`
