@@ -52,8 +52,8 @@ body:
       label: 'environment'
       description: >-
         Tell us about the environment. e.g. control node/target operating system versions, Python version, etc.
-      validations:
-        required: true
+    validations:
+      required: true
 
   - type: 'textarea'
     attributes:
