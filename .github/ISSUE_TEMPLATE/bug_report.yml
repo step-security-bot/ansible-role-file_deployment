@@ -90,7 +90,7 @@ body:
       options:
         - 'Ansible Galaxy'
         - 'git'
-      default: 1
+      default: 0
     validations:
       required: true
 
