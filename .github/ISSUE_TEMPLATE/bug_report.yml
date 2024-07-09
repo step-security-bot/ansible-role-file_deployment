@@ -61,32 +61,36 @@ body:
       required: true
 
   - type: 'dropdown'
-    label: 'Ansible installation method'
-    description: 'How did you install Ansible?'
-    options:
-      - 'RPM'
-      - 'pip'
-      - 'Execution Environment (EE)'
-      - 'Build from source'
+    attributes:
+      label: 'Ansible installation method'
+      description: 'How did you install Ansible?'
+      options:
+        - 'RPM'
+        - 'pip'
+        - 'Execution Environment (EE)'
+        - 'Build from source'
+      default: 0
     required: true
-    default: 0
 
   - type: 'textarea'
-    label: 'Execution Environment'
-    description: >-
-      If you selected Execution Environment (EE) as Ansible installation method, which EE did you use?
+    attributes:
+      label: 'Execution Environment'
+      description: >-
+        If you selected Execution Environment (EE) as Ansible installation method, which EE did you use?
 
-      Optionally, provide your Execution Environment definition, if you've built a custom EE
+        Optionally, provide your Execution Environment definition, if you've built a custom EE
     required: false
 
   - type: 'dropdown'
-    label: 'Collection/Role installation source'
-    description: 'How did you install the Collection/Role?'
-    options:
-      - 'Ansible Galaxy'
-      - 'git'
-    required: true
-    default: 1
+    attributes:
+      label: 'Collection/Role installation source'
+      description: 'How did you install the Collection/Role?'
+      options:
+        - 'Ansible Galaxy'
+        - 'git'
+      default: 1
+    validations:
+      required: true
 
   - type: 'textarea'
     attributes:
