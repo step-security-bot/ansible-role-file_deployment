@@ -105,7 +105,7 @@ jobs:
           allowed-endpoints: >
             api.github.com:443
             console.redhat.com:443
-            cdn.quay.io:443
+            quay.io:443
             galaxy.ansible.com:443
             ghcr.io:443
             github.com:443
