@@ -11,6 +11,9 @@
   "timezone": "Europe/Berlin",
   "osvVulnerabilityAlerts": true,
   "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "regex": {
+    "pinDigests": true
+  },
   "packageRules": [
     {
       "matchFileNames": [
