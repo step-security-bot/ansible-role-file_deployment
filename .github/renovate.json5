@@ -108,7 +108,7 @@
     },
     {
       "description": "Disable digest pinning for the renovate image in the renovate workflow",
-      "matchFiles": [
+      "matchFileNames": [
         ".github/workflows/renovate.ya?ml$"
       ],
       "matchDepNames": [
