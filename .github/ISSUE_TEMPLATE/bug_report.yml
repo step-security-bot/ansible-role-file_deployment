@@ -62,7 +62,7 @@ body:
 
   - type: 'textarea'
     attributes:
-      label: 'environment'
+      label: 'Environment'
       description: >-
         Tell us about the environment. e.g. control node/target operating system versions, Python version, etc.
     validations:
