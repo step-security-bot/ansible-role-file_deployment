@@ -25,17 +25,16 @@ body:
     validations:
       required: true
 
-  - type: 'textarea'
+  - type: 'markdown'
     attributes:
       label: 'Steps To Reproduce'
       description: >-
         Steps to reproduce the behavior. Please ensure to provide a
         [minimal reproducible example](http://stackoverflow.com/help/mcve)
-      render: 'markdown'
     validations:
       required: true
 
-  - type: 'textarea'
+  - type: 'markdown'
     attributes:
       label: 'Ansible, role and collection versions'
       description: >-
@@ -43,7 +42,6 @@ body:
         1. `ansible --version`
         1. `ansible-galaxy collection list`
         1. `ansible-galaxy role list`
-      render: 'markdown'
     validations:
       required: true
 
