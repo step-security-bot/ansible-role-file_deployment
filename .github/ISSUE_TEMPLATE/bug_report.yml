@@ -70,7 +70,8 @@ body:
         - 'Execution Environment (EE)'
         - 'Build from source'
       default: 0
-    required: true
+    validations:
+      required: true
 
   - type: 'textarea'
     attributes:
@@ -79,7 +80,8 @@ body:
         If you selected Execution Environment (EE) as Ansible installation method, which EE did you use?
 
         Optionally, provide your Execution Environment definition, if you've built a custom EE
-    required: false
+    validations:
+      required: true
 
   - type: 'dropdown'
     attributes:
