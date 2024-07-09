@@ -1,0 +1,64 @@
+---
+name: '🐞 Bug'
+description: 'File a bug/issue'
+title: '[BUG] <title>'
+body:
+  - type: 'checkboxes'
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the bug you encountered.'
+      options:
+        - label: 'I have searched the existing issues'
+          required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Current Behavior'
+      description: "A concise description of what you're experiencing."
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Expected Behavior'
+      description: 'A concise description of what you expected to happen.'
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Steps To Reproduce'
+      description: >-
+        Steps to reproduce the behavior. Please ensure to provide a
+        [minimal reproducible example](http://stackoverflow.com/help/mcve)
+      render: 'markdown'
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Ansible, role and collection versions'
+      description: >-
+        Verbatim output between triple backticks of following commands
+        1. `ansible --version`
+        1. `ansible-galaxy collection list`
+        1. `ansible-galaxy role list`
+      render: 'markdown'
+    validations:
+      required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'environment'
+      description: >-
+        Tell us about the environment. e.g. control node/target operating system versions, Python version, etc.
+      validations:
+        required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Anything else?'
+      description: 'Links? References? Anything that will give us more context about the issue you are encountering!'
+    validations:
+      required: false
+...
