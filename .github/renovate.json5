@@ -107,6 +107,16 @@
       ]
     },
     {
+      "description": "Disable digest pinning for the renovate image in the renovate workflow",
+      "matchFiles": [
+        ".github/workflows/renovate.ya?ml$"
+      ],
+      "matchDepNames": [
+        "renovatebot/renovate"
+      ],
+      "pinDigests": false
+    },
+    {
       "description": "Limit NodeJS to minor updates",
       "matchDepNames": [
         "node"
