@@ -43,7 +43,24 @@ env:
   cache_key: 'molecule-cache'
 
 jobs:
+  changes:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      src: '${{ steps.changes.outputs.src }}'
+
+    steps:
+      - uses: 'dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36' # v3.0.2
+        id: 'changes'
+        with:
+          filters: |
+            src:
+              - '**'
+              - '!.github/**'
+              - '.github/workflows/molecule.yml'
+
   molecule:
+    needs: 'changes'
+    if: "needs.changes.outputs.src == 'true'"
     permissions:
       contents: 'write'
     runs-on: 'ubuntu-latest'
