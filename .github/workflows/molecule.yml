@@ -68,6 +68,7 @@ jobs:
             src:
               - '**'
               - '!.github/**'
+              - '!.github/**/**'
               - '.github/workflows/molecule.yml'
 
   check-user-permissions:

@@ -1,6 +1,4 @@
-<!-- markdownlint-disable MD041 -->
-
-##### SUMMARY
+##### SUMMARY <!-- markdownlint-disable-line MD041 -->
 
 <!--- Describe the change below, including rationale and design decisions -->
 
