@@ -94,7 +94,6 @@ jobs:
           echo "${{ github.triggering_actor }} does not have permissions on this repo."
           echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
           echo "Job originally triggered by ${{ github.actor }}"
-          exit 1
 
   molecule:
     runs-on: 'ubuntu-latest'
