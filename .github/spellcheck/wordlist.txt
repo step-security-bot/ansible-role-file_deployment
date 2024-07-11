@@ -6,3 +6,5 @@ runtime
 sexualized
 Ansible
 mitigations
+RHEL
+UBI
