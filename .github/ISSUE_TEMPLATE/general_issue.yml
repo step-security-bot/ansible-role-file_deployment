@@ -1,0 +1,28 @@
+---
+name: '🐞 General issue'
+description: 'File a general bug/issue not regarding the Ansible code of the role/collection itself'
+title: '[BUG] <title>'
+body:
+  - type: 'checkboxes'
+    attributes:
+      label: 'Is this issue not related to the role/collection itself?'
+      description: 'Please use this type of issue only for general issues. For instance issues with the workflows.'
+      options:
+        - label: 'This is a general issue not related to the Ansible code of the role/collection itself'
+          required: true
+
+  - type: 'checkboxes'
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the bug you encountered.'
+      options:
+        - label: 'I have searched the existing issues'
+          required: true
+
+  - type: 'textarea'
+    attributes:
+      label: 'Issue'
+      description: "Explain your issue in as much details as possible."
+    validations:
+      required: true
+...
