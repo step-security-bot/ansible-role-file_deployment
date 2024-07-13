@@ -60,9 +60,7 @@ jobs:
           filters: |
             src:
               - '**'
-              - '!.github/**'
-              - '!.github/**/**'
-              - '.github/workflows/molecule.yml'
+              - '!(.github/**)'
 
   check-user-permissions:
     runs-on: 'ubuntu-latest'

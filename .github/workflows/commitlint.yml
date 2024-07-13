@@ -16,12 +16,8 @@ jobs:
         with:
           egress-policy: 'block'
           allowed-endpoints: >
-            azure.archive.ubuntu.com:80
-            deb.nodesource.com:443
-            esm.ubuntu.com:443
             github.com:443
-            motd.ubuntu.com:443
-            packages.microsoft.com:443
+            nodejs.org:443
             registry.npmjs.org:443
 
       - name: 'Checkout the repository'
@@ -29,13 +25,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 'Install required dependencies'
-        run: |
-          sudo apt update
-          sudo apt install -y sudo
-          sudo apt install -y git curl
-          curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-          sudo DEBIAN_FRONTEND=noninteractive apt install -y nodejs
+      - name: 'Install NodeJS'
+        uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
+        with:
+          # renovate dep: datasource=npm depName=node
+          node-version: '20.15.1'
 
       - name: 'Install commitlint'
         run: |
