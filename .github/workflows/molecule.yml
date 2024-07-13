@@ -37,6 +37,7 @@ env:
 jobs:
   changes:
     runs-on: 'ubuntu-latest'
+    if: "contains(github.event.pull_request.labels.*.name, 'run')"
     outputs:
       src: '${{ steps.changes.outputs.src }}'
 
