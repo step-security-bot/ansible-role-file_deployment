@@ -16,12 +16,8 @@ jobs:
         with:
           egress-policy: 'block'
           allowed-endpoints: >
-            azure.archive.ubuntu.com:80
-            deb.nodesource.com:443
-            esm.ubuntu.com:443
             github.com:443
-            motd.ubuntu.com:443
-            packages.microsoft.com:443
+            nodejs.org:443
             registry.npmjs.org:443
 
       - name: 'Checkout the repository'
