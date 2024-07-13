@@ -3,8 +3,7 @@ name: 'molecule'
 on:  # yamllint disable-line rule:truthy
   pull_request_target:
     types:
-      - 'opened'
-      - 'synchronize'
+      - 'labeled'
 
   push:
     branches:
@@ -38,6 +37,7 @@ env:
 jobs:
   changes:
     runs-on: 'ubuntu-latest'
+    if: "contains(github.event.pull_request.labels.*.name, 'run')"
     outputs:
       src: '${{ steps.changes.outputs.src }}'
 
