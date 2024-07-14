@@ -3,7 +3,8 @@ module.exports = {
     AUTOMATION_HUB_AUTH_TOKEN: process.env.RENOVATE_AUTOMATION_HUB_AUTH_TOKEN,
     CRC_USERNAME: process.env.RENOVATE_CRC_USERNAME,
     CRC_PASSWORD: process.env.RENOVATE_CRC_PASSWORD,
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    GHCR_USERNAME: process.env.RENOVATE_GHCR_USERNAME,
+    GHCR_TOKEN: process.env.RENOVATE_GHCR_TOKEN,
   },
   allowedHeaders: [
     'Authorization',
@@ -29,8 +30,8 @@ module.exports = {
     },
     {
       matchHost: 'ghcr.io',
-      username: '{{ process.env.GHCR_USERNAME }}',
-      password: '{{ secrets.GITHUB_TOKEN }}',
+      username: '{{ secrets.GHCR_USERNAME }}',
+      password: '{{ secrets.GHCR_TOKEN }}',
     },
   ],
 };
