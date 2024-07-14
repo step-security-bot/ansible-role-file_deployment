@@ -50,6 +50,12 @@ jobs:
       image: 'ghcr.io/ansible/community-ansible-dev-tools:v24.7.1@sha256:683fa75f4ac3b59f83de4ef287e7721fafab852c0511030dee27c9c4c45f5333'
       options: '--user root --privileged'
     steps:
+      - name: 'Install NodeJS'
+        uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
+        with:
+          # renovate dep: datasource=npm depName=node
+          node-version: '20.15.1'
+
       - name: 'Checkout repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
 
