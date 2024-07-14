@@ -48,6 +48,9 @@ jobs:
     container:
       # yamllint disable-line rule:line-length
       image: '${{ matrix.container.image }}'
+      credentials:
+        username: '${{ github.actor }}'
+        password: '${{ secrets.GITHUB_TOKEN }}'
       options: '--user root --privileged'
     strategy:
       matrix:
