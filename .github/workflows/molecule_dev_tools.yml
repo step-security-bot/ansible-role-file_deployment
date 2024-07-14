@@ -71,13 +71,17 @@ jobs:
           - image: 'ghcr.io/ansible-community/community-ee-base:2.17.1-1@sha256:4a049f22b18e0a2b4ba7ead68ff50cd6a1925d29085efe877d841f5c4df9dacc'
             # renovate yaml: datasource=pypi
             molecule: '24.7.0'
-            install_podman: true
+            additional_packages:
+              - 'podman'
+              - 'fuse-overlayfs'
 
           # yamllint disable-line rule:line-length
           - image: 'ghcr.io/ansible-community/community-ee-base:2.16.6-1@sha256:742e6eb0ffde84f8a1c916a5eae217da317b4a4705a7636c70696bcd7f6a8cdd'
             # renovate yaml: datasource=pypi
             molecule: '24.7.0'
-            install_podman: true
+            additional_packages:
+              - 'podman'
+              - 'fuse-overlayfs'
 
     steps:
       - name: 'Install NodeJS'
@@ -94,13 +98,13 @@ jobs:
         run: |
           pip3 install molecule==${{ matrix.container.molecule }}
 
-      - name: 'Install podman'
-        if: 'matrix.container.install_podman'
+      - name: 'Install additional packages'
+        if: "join(matrix.container.additional_packages, ' ') != ''"
         run: |
           if command dnf 2>&1 > /dev/null; then
-            dnf install podman -y
+            dnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
           elif command microdnf 2>&1 > /dev/null; then
-            microdnf install podman -y
+            microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
           else
             echo "ERROR: Neither dnf nor microdnf found!"
             exit 1
