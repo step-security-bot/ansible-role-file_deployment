@@ -4,7 +4,7 @@ module.exports = {
     CRC_USERNAME: process.env.RENOVATE_CRC_USERNAME,
     CRC_PASSWORD: process.env.RENOVATE_CRC_PASSWORD,
     GHCR_USERNAME: process.env.RENOVATE_GHCR_USERNAME,
-    GHCR_TOKEN: process.env.RENOVATE_GHCR_TOKEN,
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
   allowedHeaders: [
     'Authorization',
@@ -31,7 +31,7 @@ module.exports = {
     {
       matchHost: 'ghcr.io',
       username: '{{ secrets.GHCR_USERNAME }}',
-      password: '{{ secrets.GHCR_TOKEN }}',
+      password: '{{ secrets.GITHUB_TOKEN }}',
     },
   ],
 };

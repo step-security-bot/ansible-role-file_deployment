@@ -236,7 +236,7 @@ jobs:
           RENOVATE_CRC_USERNAME: '${{ secrets.CRC_USERNAME }}'
           RENOVATE_CRC_PASSWORD: '${{ secrets.CRC_PASSWORD }}'
           RENOVATE_GHCR_USERNAME: '${{ github.actor }}'
-          RENOVATE_GHCR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           LOG_LEVEL: "${{ github.event.inputs.renovateLogLevel || 'debug' }}"
 
       - name: 'Compress Renovate cache to improve performance'
