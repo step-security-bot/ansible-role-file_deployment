@@ -100,7 +100,13 @@ jobs:
       - name: 'Install podman'
         if: 'matrix.container.install_podman'
         run: |
-          dnf install podman -y
+          if command -v dnf; then
+            dnf install podman -y
+          elif command -v microdnf; then
+            microdnf install podman -y
+          else
+            echo "ERROR: Neither dnf nor microdnf found!"
+            exit 1
 
       - name: 'Run molecule'
         run: |
