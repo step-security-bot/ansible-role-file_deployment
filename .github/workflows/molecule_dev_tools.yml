@@ -1,0 +1,58 @@
+---
+name: 'molecule Ansible dev tools container'
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - 'main'
+
+  push:
+    branches:
+      - 'main'
+
+  workflow_dispatch: {}
+
+permissions:
+  contents: 'read'
+
+jobs:
+  changes:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      src: '${{ steps.changes.outputs.src }}'
+
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Check if molecule should run'
+        uses: 'dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36' # v3.0.2
+        id: 'changes'
+        with:
+          filters: |
+            src:
+              - '**'
+              - '!(.github/**)'
+
+  molecule-dev-tools:
+    runs-on: 'ubuntu-latest'
+    needs: 'changes'
+    if: "needs.changes.outputs.src == 'true'"
+    container:
+      # yamllint disable-line rule:line-length
+      image: 'ghcr.io/ansible/community-ansible-dev-tools:v24.7.1@sha256:683fa75f4ac3b59f83de4ef287e7721fafab852c0511030dee27c9c4c45f5333'
+    steps:
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Run molecule'
+        run: |
+          molecule test
+...
