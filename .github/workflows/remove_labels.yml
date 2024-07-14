@@ -1,0 +1,26 @@
+---
+name: 'Remove labels'
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    types:
+      - 'synchronize'
+
+  workflow_dispatch: {}
+
+permissions:
+  contents: 'read'
+
+jobs:
+  remove-label:
+    name: 'Remove run label on pull request synchronize'
+    runs-on: 'ubuntu-latest'
+    if: "github.base_ref == 'main'"
+    permissions:
+      pull-requests: 'write'
+    steps:
+      - uses: 'mondeja/remove-labels-gh-action@b7118e4ba5dca74acf1059b3cb7660378ff9ab1a' # v2.0.0
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          labels: |
+            run
+...
