@@ -123,7 +123,7 @@ jobs:
           mkdir -p /root/.config/containers
 
           # download default configurations
-          repoURL="curl https://raw.githubusercontent.com/containers/image_build/main/podman"
+          repoUrl="curl https://raw.githubusercontent.com/containers/image_build/main/podman"
           curl "${repoUrl}/containers.conf" -o "/etc/containers/containers.conf"
           curl "${repoUrl}/podman-containers.conf" -o "/root/.config/containers/containers.conf"
 
