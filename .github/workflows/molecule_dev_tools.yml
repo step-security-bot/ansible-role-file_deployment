@@ -47,8 +47,38 @@ jobs:
     if: "needs.changes.outputs.src == 'true'"
     container:
       # yamllint disable-line rule:line-length
-      image: 'ghcr.io/ansible/community-ansible-dev-tools:v24.7.1@sha256:683fa75f4ac3b59f83de4ef287e7721fafab852c0511030dee27c9c4c45f5333'
+      image: '${{ matrix.container.image }}'
       options: '--user root --privileged'
+    strategy:
+      matrix:
+        container:
+          #
+          # Ansible Dev Tools container
+          #
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v24.7.1@sha256:683fa75f4ac3b59f83de4ef287e7721fafab852c0511030dee27c9c4c45f5333'
+            molecule: '24.7.0'
+
+          #
+          # Ansible community execution environments
+          #
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.17.1-1@sha256:4a049f22b18e0a2b4ba7ead68ff50cd6a1925d29085efe877d841f5c4df9dacc'
+            # renovate yaml: datasource=pypi
+            molecule: '24.7.0'
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.16.6-1@sha256:742e6eb0ffde84f8a1c916a5eae217da317b4a4705a7636c70696bcd7f6a8cdd'
+            # renovate yaml: datasource=pypi
+            molecule: '24.7.0'
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.15.7-1@sha256:b3c0c575ab434304b677fdec22cc3436dddbc772160f3d3a2c5bbb7bc7345c03'
+            # renovate yaml: datasource=pypi
+            molecule: '6.0.3'
+
     steps:
       - name: 'Install NodeJS'
         uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
@@ -58,6 +88,11 @@ jobs:
 
       - name: 'Checkout repository'
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Install molecule'
+        if: "join(matrix.container.molecule, ' ') != ''"
+        run: |
+          pip3 install molecule==${{ matrix.container.molecule }}
 
       - name: 'Run molecule'
         run: |
