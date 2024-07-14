@@ -100,7 +100,7 @@ jobs:
       - name: 'Install podman'
         if: 'matrix.container.install_podman'
         run: |
-          microdnf install podman -y
+          dnf install podman -y
 
       - name: 'Run molecule'
         run: |
