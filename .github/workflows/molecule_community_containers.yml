@@ -1,0 +1,151 @@
+---
+name: 'molecule community containers'
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - 'main'
+
+  push:
+    branches:
+      - 'main'
+
+  workflow_dispatch: {}
+
+permissions:
+  contents: 'read'
+
+jobs:
+  changes:
+    runs-on: 'ubuntu-latest'
+    outputs:
+      src: '${{ steps.changes.outputs.src }}'
+
+    steps:
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
+        with:
+          egress-policy: 'block'
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Check if molecule should run'
+        uses: 'dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36' # v3.0.2
+        id: 'changes'
+        with:
+          filters: |
+            src:
+              - '**'
+              - '!(.github/**)'
+
+  molecule-dev-tools:
+    runs-on: 'ubuntu-latest'
+    needs: 'changes'
+    if: "needs.changes.outputs.src == 'true'"
+    container:
+      # yamllint disable-line rule:line-length
+      image: '${{ matrix.container.image }}'
+      credentials:
+        username: '${{ github.actor }}'
+        password: '${{ secrets.GITHUB_TOKEN }}'
+      options: '--user root --privileged'
+    strategy:
+      matrix:
+        container:
+          #
+          # Ansible Dev Tools container
+          #
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible/community-ansible-dev-tools:v24.7.1@sha256:683fa75f4ac3b59f83de4ef287e7721fafab852c0511030dee27c9c4c45f5333'
+            molecule: '24.7.0'
+
+          #
+          # Ansible community execution environments
+          #
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.17.1-1@sha256:4a049f22b18e0a2b4ba7ead68ff50cd6a1925d29085efe877d841f5c4df9dacc'
+            # renovate yaml: datasource=pypi
+            molecule: '24.7.0'
+            configure_podman: true
+            additional_packages:
+              - 'podman'
+              - 'fuse-overlayfs'
+
+          # yamllint disable-line rule:line-length
+          - image: 'ghcr.io/ansible-community/community-ee-base:2.16.6-1@sha256:742e6eb0ffde84f8a1c916a5eae217da317b4a4705a7636c70696bcd7f6a8cdd'
+            # renovate yaml: datasource=pypi
+            molecule: '24.7.0'
+            configure_podman: true
+            additional_packages:
+              - 'podman'
+              - 'fuse-overlayfs'
+
+    steps:
+      - name: 'Install NodeJS'
+        uses: 'actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b' # v4.0.3
+        with:
+          # renovate dep: datasource=npm depName=node
+          node-version: '20.15.1'
+
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
+
+      - name: 'Install molecule'
+        if: "join(matrix.container.molecule, ' ') != ''"
+        run: |
+          pip3 install molecule==${{ matrix.container.molecule }}
+
+      - name: 'Install additional packages'
+        if: "join(matrix.container.additional_packages, ' ') != ''"
+        run: |
+          if command dnf 2>&1 > /dev/null; then
+            dnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
+          elif command microdnf 2>&1 > /dev/null; then
+            microdnf install -y ${{ join(matrix.container.additional_packages, ' ') }}
+          else
+            echo "ERROR: Neither dnf nor microdnf found!"
+            exit 1
+          fi
+
+      - name: 'Configure podman'
+        if: 'matrix.container.configure_podman'
+        run: |
+          # install shadow utils
+          dnf -y install shadow-utils
+          rpm --setcaps shadow-utils 2>/dev/null
+
+          # create configuration directory for the podman configuration files
+          mkdir -p /root/.config/containers
+
+          # download default configurations
+          repoUrl="https://raw.githubusercontent.com/containers/image_build/main/podman"
+          curl "${repoUrl}/containers.conf" -o "/etc/containers/containers.conf"
+          curl "${repoUrl}/podman-containers.conf" -o "/root/.config/containers/containers.conf"
+
+
+          # below replacements ensure that podman works with fuse-overlay storage inside a container
+          sed -e 's|^#mount_program|mount_program|g' \
+              -e '/additionalimage.*/a "/var/lib/shared",' \
+              -e 's|^mountopt[[:space:]]*=.*$|mountopt = "nodev,fsync=0"|g' \
+              "/usr/share/containers/storage.conf" \
+              > "/etc/containers/storage.conf"
+
+          # ensure required files and directories exist
+          mkdir -p /var/lib/shared/overlay-images \
+                /var/lib/shared/overlay-layers \
+                /var/lib/shared/vfs-images \
+                /var/lib/shared/vfs-layers && \
+                touch /var/lib/shared/overlay-images/images.lock && \
+                touch /var/lib/shared/overlay-layers/layers.lock && \
+                touch /var/lib/shared/vfs-images/images.lock && \
+                touch /var/lib/shared/vfs-layers/layers.lock
+
+      - name: 'Run molecule'
+        run: |
+          molecule test
+...
