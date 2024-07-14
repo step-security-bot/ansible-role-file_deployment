@@ -34,7 +34,8 @@
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
-        ".github/workflows/molecule.yml"
+        "^.github/workflows/molecule.ya?ml$",
+        "^.github/workflows/molecule_community_containers.ya?ml$"
       ],
       "minor": {
         "enabled": true
@@ -45,7 +46,8 @@
       "rangeStrategy": "bump",
       "excludeDepNames": [
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
+        "ghcr.io/ansible-community/community-ee-base"
       ]
     },
     {
@@ -65,7 +67,8 @@
       "description": "Update execution environments only on the patch level",
       "matchDepNames": [
         "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8",
-        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9"
+        "registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9",
+        "ghcr.io/ansible-community/community-ee-base"
       ],
       "major": {
         "enabled": false
@@ -134,7 +137,8 @@
       "description": "Extract execution environments defined via image:",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/molecule\.ya?ml$"
+        "^.github/workflows/molecule\.ya?ml$",
+        "^.github/workflows/molecule_community_containers.ya?ml$"
       ],
       "matchStrings": [
         "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"
