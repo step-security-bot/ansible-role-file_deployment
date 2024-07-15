@@ -120,7 +120,7 @@ None
 First off, thanks for taking the time to contribute! ❤️
 
 All types of contributions are encouraged and valued.
-Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for different ways to help and details about how this project handles contributions.
+Please see [`CONTRIBUTING.md`](docs/CONTRIBUTING.md) for different ways to help and details about how this project handles contributions.
 
 ## License
 
