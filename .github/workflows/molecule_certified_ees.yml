@@ -1,5 +1,5 @@
 ---
-name: 'molecule'
+name: 'molecule certified EEs'
 on:  # yamllint disable-line rule:truthy
   pull_request_target:
     types:

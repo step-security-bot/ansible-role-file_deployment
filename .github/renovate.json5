@@ -34,8 +34,8 @@
     {
       "description": "Allow updating molecule packages to higher versions, but exclude execution environments",
       "matchFileNames": [
-        "^.github/workflows/molecule.ya?ml$",
-        "^.github/workflows/molecule_community_containers.ya?ml$"
+        "^.github/workflows/molecule_certified_ees\.ya?ml$",
+        "^.github/workflows/molecule_community_ees.ya?ml$"
       ],
       "minor": {
         "enabled": true
@@ -137,8 +137,8 @@
       "description": "Extract execution environments defined via image:",
       "customType": "regex",
       "fileMatch": [
-        "^.github/workflows/molecule\.ya?ml$",
-        "^.github/workflows/molecule_community_containers.ya?ml$"
+        "^.github/workflows/molecule_certified_ees\.ya?ml$",
+        "^.github/workflows/molecule_community_ees.ya?ml$"
       ],
       "matchStrings": [
         "image:\\s\'(?<depName>[^:\"']+):(?<currentValue>[^@\"']+)(@(?<currentDigest>sha256:[a-f0-9]+))?\'"
