@@ -11,7 +11,7 @@ also be very happy about:
 
 - Star the project
 - Tweet about it
-- Refer this project in your project's [README.md](README.md)
+- Refer this project in your project's [README.md](../README.md)
 - Mention the project at local meetups and tell your friends/colleagues
 
 ## Table of Contents
@@ -36,7 +36,7 @@ By participating, you are expected to uphold this code. Please report unacceptab
 
 ## I Have a Question
 
-> If you want to ask a question, we assume that you have read the available [Documentation](README.md)
+> If you want to ask a question, we assume that you have read the available [Documentation](../README.md)
 
 Before you ask a question, it is best to search for existing [Issues](https://github.com/sscheib/ansible-role-openwrt_extroot/issues) that might help you. In case you have found a
 suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
@@ -65,7 +65,7 @@ in detail in your report. Please complete the following steps in advance to help
 
 - Make sure that you are using the latest version.
 - Determine if your bug is really a bug and not an error on your side e.g. using incompatible environment components/versions
-  (Make sure that you have read the [documentation](README.md). If you are looking for support, you might want to check [this section](#i-have-a-question)).
+  (Make sure that you have read the [documentation](../README.md). If you are looking for support, you might want to check [this section](#i-have-a-question)).
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug
   or error in the [bug tracker](https://github.com/sscheib/ansible-role-openwrt_extroot/issues).
 - Also make sure to search the internet (including Stack Overflow) to see if users outside of the GitHub community have discussed the issue.
@@ -106,7 +106,7 @@ functionality**. Following these guidelines will help maintainers and the commun
 #### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
-- Read the [documentation](README.md) carefully and find out if the functionality is already covered, maybe by an individual configuration.
+- Read the [documentation](../README.md) carefully and find out if the functionality is already covered, maybe by an individual configuration.
 - Perform a [search](https://github.com/sscheib/ansible-role-openwrt_extroot/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing
   issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature.
@@ -161,13 +161,13 @@ This project makes use and enforces [Conventional Commits](https://www.conventio
 When contributing code or documentation changes, please ensure to set up your [development environment accordingly](#your-first-code-contribution) which includes
 [`commitlint`](https://github.com/conventional-changelog/commitlint) as `pre-commit` hook which will prevent malformed commit messages.
 
-If you are new to Conventional Commits, you might want to consider installing `commitlint-cli` which with our [provided configuration file](.commitlintrc.js) allows for prompting
-questions and crafting an appropriate commit message out of your selections.
+If you are new to Conventional Commits, you might want to consider installing `commitlint-cli` which with our [provided configuration file](../.commitlintrc.js) allows for
+prompting questions and crafting an appropriate commit message out of your selections.
 
 If you accidentally pushed a commit that does not follow Conventional Commits, the continuous integration (CI) workflow validating commit messages will fail. To correct this, please
 refer to [Changing a commit message](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message).
 
-The respective configuration file is [`.commitlintrc.js`](.commitlintrc.js).
+The respective configuration file is [`.commitlintrc.js`](../.commitlintrc.js).
 
 ### Markdown
 
@@ -177,21 +177,21 @@ workflow in GitHub.
 
 The respective configuration files are:
 
-- [`.markdownlint.yml`](.markdownlint.yml) and [`.markdownlintignore`](.markdownlintignore) for `markdown-lint`
-- [`.markdown-link-check.json`](.markdown-link-check.json) for `markdown-link-check`
+- [`.markdownlint.yml`](../.markdownlint.yml) and [`.markdownlintignore`](../.markdownlintignore) for `markdown-lint`
+- [`.markdown-link-check.json`](../.markdown-link-check.json) for `markdown-link-check`
 
 ### Ansible
 
 Ansible code is validated using [`ansible-lint`](https://github.com/ansible/ansible-lint) and [`yamllint`](https://github.com/adrienverge/yamllint) (called from `ansible-lint`).
 It is included as `pre-commit` hook and continuous integration (CI) workflow in GitHub.
 
-The respective configuration files are [`.ansible-lint`](.ansible-lint) and [`.yamllint`](.yamllint).
+The respective configuration files are [`.ansible-lint`](../.ansible-lint) and [`.yamllint`](../.yamllint).
 
 ### Spelling
 
 We are spellchecking both Ansible code and Markdown files using [`pyspelling`](https://github.com/facelessuser/pyspelling/tree/master).
 
-The respective configuration file is [`.pyspelling.yml`](.pyspelling.yml).
+The respective configuration file is [`.pyspelling.yml`](../.pyspelling.yml).
 
 ## Attribution
 
