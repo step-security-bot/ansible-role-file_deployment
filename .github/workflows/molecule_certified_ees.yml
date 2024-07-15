@@ -62,6 +62,7 @@ jobs:
           filters: |
             src:
               - '!(.github/**)'
+              - '!(docs/**)'
               - '.github/workflows/molecule_certified_ees.yml'
 
   check-user-permissions:

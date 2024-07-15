@@ -38,8 +38,9 @@ jobs:
         with:
           filters: |
             src:
-              - '**'
               - '!(.github/**)'
+              - '!(docs/**)'
+              - '.github/workflows/molecule_community_ees.yml'
 
   molecule-dev-tools:
     runs-on: 'ubuntu-latest'
