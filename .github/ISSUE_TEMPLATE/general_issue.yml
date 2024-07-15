@@ -1,7 +1,11 @@
 ---
-name: '🐞 General issue'
+name: '💬 General issue'
 description: 'File a general bug/issue not regarding the Ansible code of the role/collection itself'
-title: '[BUG] <title>'
+title: '[GENERAL] <title>'
+labels:
+  - 'general issue'
+  - 'review required'
+
 body:
   - type: 'checkboxes'
     attributes:
@@ -22,7 +26,7 @@ body:
   - type: 'textarea'
     attributes:
       label: 'Issue'
-      description: "Explain your issue in as much details as possible."
+      description: 'Explain your issue in as much details as possible.'
     validations:
       required: true
 ...

@@ -2,6 +2,10 @@
 name: '🚀 Feature Request'
 description: 'Suggest an idea for this project'
 title: '[FEAT] <title>'
+labels:
+  - 'enhancement'
+  - 'review required'
+
 body:
   - type: 'checkboxes'
     attributes:
