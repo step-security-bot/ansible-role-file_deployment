@@ -65,6 +65,14 @@ env:
 
 jobs:
   validate-config:
+    # run the schedule only on the main repository - manual runs via workflow_dispatch still work
+    if: >-
+      (
+        github.event_name == 'schedule' &&
+        github.repository == 'sscheib/ansible-role-file_deployment'
+      ) || (
+        github.event_name != 'schedule'
+      )
     runs-on: 'ubuntu-latest'
     steps:
       - name: 'Harden Runner'
