@@ -39,7 +39,7 @@ jobs:
           collaborators: 'all'
           committer_email: 'contributors-action@scheib.me'
           committer_username: 'Contributors Action'
-          readme_path: './docs/CONTRIBUTORS.md'
+          readme_path: 'docs/CONTRIBUTORS.md'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 ...
