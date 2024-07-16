@@ -81,8 +81,7 @@
       },
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
       "rangeStrategy": "bump",
-      "groupName": "execution environments",
-      "groupSlug": "all"
+      "groupName": "execution environments"
     },
     {
       "description": "These collections should be retrieved from console.redhat.com",
