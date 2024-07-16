@@ -108,7 +108,8 @@
       ],
       "schedule": [
         "on sunday"
-      ]
+      ],
+      "groupName": "renovate"
     },
     {
       "description": "Disable digest pinning for the renovate image in the renovate workflow",
