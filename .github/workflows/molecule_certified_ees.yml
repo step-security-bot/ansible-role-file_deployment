@@ -5,9 +5,35 @@ on:  # yamllint disable-line rule:truthy
     types:
       - 'labeled'
 
+    paths:
+      - '.github/workflows/molecule_certified_ees.yml'
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'library/**'
+      - 'lookup_plugins/**'
+      - 'meta/**'
+      - 'module_utils/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - 'vars/**'
+
   push:
     branches:
       - 'main'
+
+    paths:
+      - '.github/workflows/molecule_certified_ees.yml'
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'library/**'
+      - 'lookup_plugins/**'
+      - 'meta/**'
+      - 'module_utils/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - 'vars/**'
 
   workflow_dispatch:
     inputs:
@@ -35,40 +61,11 @@ env:
   cache_key: 'molecule-cache'
 
 jobs:
-  changes:
+  check-user-permissions:
     runs-on: 'ubuntu-latest'
     if: >-
       contains(github.event.pull_request.labels.*.name, 'run') ||
       github.ref == 'refs/heads/main'
-    outputs:
-      src: '${{ steps.changes.outputs.src }}'
-
-    steps:
-      - name: 'Harden Runner'
-        uses: 'step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6' # v2.8.1
-        with:
-          egress-policy: 'block'
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-
-      - name: 'Checkout repository'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # v4.1.7
-
-      - name: 'Check if molecule should run'
-        uses: 'dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36' # v3.0.2
-        id: 'changes'
-        with:
-          filters: |
-            src:
-              - '!(.github/**)'
-              - '!(docs/**)'
-              - '.github/workflows/molecule_certified_ees.yml'
-
-  check-user-permissions:
-    runs-on: 'ubuntu-latest'
-    needs: 'changes'
-    if: "needs.changes.outputs.src == 'true'"
     outputs:
       require-result: '${{ steps.check-access.outputs.require-result }}'
     steps:
@@ -96,7 +93,7 @@ jobs:
           echo "Current permission level is ${{ steps.check-access.outputs.user-permission }}"
           echo "Job originally triggered by ${{ github.actor }}"
 
-  molecule:
+  molecule-certified-ees:
     runs-on: 'ubuntu-latest'
     needs: 'check-user-permissions'
     if: "needs.check-user-permissions.outputs.require-result == 'true'"
