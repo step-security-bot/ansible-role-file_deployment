@@ -81,7 +81,7 @@
       },
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.+(?<patch>\\d+)(?<build>-\\d+)?$",
       "rangeStrategy": "bump",
-      "groupName": "Execution Environments",
+      "groupName": "execution environments",
       "groupSlug": "all"
     },
     {
@@ -150,12 +150,6 @@
       "patch": {
         "enabled": true
       }
-    },
-    {
-      "matchDatasources": [
-        "docker"
-      ],
-      "commitMessageTopic": "{{{replace 'registry\.redhat\.io\/' '' depName}}}"
     }
   ],
   "pre-commit": {
