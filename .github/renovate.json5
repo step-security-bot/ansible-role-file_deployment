@@ -127,6 +127,27 @@
       "major": {
         "enabled": false
       }
+    },
+    {
+      "description": "Limit Ansible Core in pre-commit to patch updates",
+      "matchDepNames": [
+        "ansible-core"
+      ],
+      "matchFileNames": [
+        ".pre-commit-config.yaml"
+      ],
+      "matchDatasources": [
+        "pypi"
+      ],
+      "major": {
+        "enabled": false
+      },
+      "minor": {
+        "enabled": false
+      },
+      "patch": {
+        "enabled": true
+      }
     }
   ],
   "pre-commit": {
