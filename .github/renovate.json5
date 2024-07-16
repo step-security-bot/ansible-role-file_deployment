@@ -148,6 +148,12 @@
       "patch": {
         "enabled": true
       }
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "commitMessageTopic": "{{{replace 'registry\.redhat\.io\/' '' depName}}}"
     }
   ],
   "pre-commit": {
